@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="app.title">TabCtrl</title>
+
+  <!-- Google Fonts: Kalam (headings) + Patrick Hand (body) — hand-drawn design system -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+
+
+  <!-- Settings button — fixed top-right corner, always accessible. -->
+  <button class="settings-btn settings-btn--fixed" id="settingsBtn" data-action="open-settings" data-i18n-title="settings.title" type="button" aria-label="Settings">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+  </button>
+
+  <!-- ================================================================
+       TabCtrl DUPES BANNER — appears when you have extra TabCtrl tabs open
+       Hidden by default; app.js shows it when dupeTableControlCount > 1
+       ================================================================ -->
+  <div class="tab-cleanup-banner" id="tableControlDupeBanner" style="display:none">
+    <div class="tab-cleanup-left">
+      <div class="tab-cleanup-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
+        </svg>
+      </div>
+      <div class="tab-cleanup-text" id="tableControlDupeText">
+        <!-- Rendered by checkTableControlDupes() in app.js using t('banner.table_control_dupes', count) -->
+      </div>
+    </div>
+    <button class="tab-cleanup-btn" data-action="close-table-control-dupes" data-i18n="banner.close_extras">Close extras</button>
+  </div>
+
+  <!-- ================================================================
+       MAIN CONTENT — three stacked sections
+       1. Right now (open tabs)
+       2. Saved for later (active saved tabs)
+       3. Archive (completed saved tabs)
+       Each section is rendered conditionally by app.js.
+       ================================================================ -->
+  <main class="dashboard-stack">
+
+    <!-- 0. HERO — empty-state concept showcase (only shown when nothing else is).
+         Three slogans rotate every ~6s; user can also click dots to jump. -->
+    <section class="hero-section" id="heroSection" aria-label="TabCtrl concepts">
+      <div class="hero-frame">
+        <div class="hero-slides" id="heroSlides">
+          <article class="hero-slide is-active" data-slide="0">
+            <div class="hero-numeral">01</div>
+            <p class="hero-slogan" data-i18n="hero.slogan_1">当标签页过载成为日常，TabCtrl 帮你回到清晰。</p>
+            <p class="hero-sub" data-i18n="hero.sub_1">Tabs pile up. We help you see the floor.</p>
+          </article>
+          <article class="hero-slide" data-slide="1">
+            <div class="hero-numeral">02</div>
+            <p class="hero-slogan" data-i18n="hero.slogan_2">不是要打开更多，只是让你看清现有。</p>
+            <p class="hero-sub" data-i18n="hero.sub_2">Not more tabs. Just the ones you already have.</p>
+          </article>
+          <article class="hero-slide" data-slide="2">
+            <div class="hero-numeral">03</div>
+            <p class="hero-slogan" data-i18n="hero.slogan_3">注意力是稀缺资源，TabCtrl 帮你珍惜它。</p>
+            <p class="hero-sub" data-i18n="hero.sub_3">Attention is scarce. We help you spend it well.</p>
+          </article>
+        </div>
+        <div class="hero-dots" id="heroDots" role="tablist" aria-label="Slide navigation">
+          <button class="hero-dot is-active" data-slide="0" role="tab" aria-label="Slide 1"></button>
+          <button class="hero-dot" data-slide="1" role="tab" aria-label="Slide 2"></button>
+          <button class="hero-dot" data-slide="2" role="tab" aria-label="Slide 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. RIGHT NOW (open tabs) -->
+    <section class="active-section section-card" id="openTabsSection" style="display:none">
+      <div class="section-header">
+        <h2 id="openTabsSectionTitle" data-i18n="section.open_tabs">Right now</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="missions" id="openTabsMissions"></div>
+    </section>
+
+    <!-- 2. TAB STASH (saved tabs, draggable between categories) -->
+    <section class="stash-section section-card" id="stashSection" style="display:none">
+      <div class="section-header">
+        <h2 data-i18n="stash.title">Tab Stash</h2>
+        <div class="section-line"></div>
+        <div class="section-count" id="stashCount">0</div>
+      </div>
+
+      <!-- Description -->
+      <p class="section-desc" data-i18n="stash.desc">Tabs you park here stay until you reopen or remove them. Drag chips between categories to organise.</p>
+
+      <!-- Search (live filter by URL or title) -->
+      <div class="stash-toolbar">
+        <input type="text" class="stash-search" id="stashSearch" placeholder="Search stashed tabs..." data-i18n-placeholder="stash.search_placeholder">
+      </div>
+
+      <!-- Category tabs (one per category + "All" + "+ New") -->
+      <div class="stash-categories" id="stashCategories"></div>
+
+      <!-- Main list of parked tabs -->
+      <div class="stash-list" id="stashList"></div>
+
+      <!-- Empty state -->
+      <div class="stash-empty" id="stashEmpty" style="display:none" data-i18n="stash.empty">
+        Stash is empty. Use the bookmark icon on any chip to park it here.
+      </div>
+    </section>
+
+    <!-- 3. HISTORY (auto-recorded closed tabs, kept 7 days / 500 entries) -->
+    <section class="history-section section-card" id="historySection" style="display:none">
+      <div class="section-header">
+        <h2 data-i18n="history.title">History</h2>
+        <div class="section-line"></div>
+        <div class="section-count" id="historyCount">0</div>
+      </div>
+      <div class="history-section-body">
+        <div class="history-toolbar">
+          <input type="text" class="history-search" id="historySearch" placeholder="Search closed tabs..." data-i18n-placeholder="history.search_placeholder">
+          <div class="history-group-toggle" role="group" aria-label="Group history by">
+            <button class="history-group-btn is-active" data-action="history-group-by" data-group-by="time" type="button" data-i18n="history.group_time">Time</button>
+            <button class="history-group-btn" data-action="history-group-by" data-group-by="domain" type="button" data-i18n="history.group_domain">Domain</button>
+          </div>
+          <button class="history-clear-older" data-action="clear-history-older" type="button" id="historyClearOlder" data-i18n="history.clear_older" data-i18n-title="history.clear_older_hint" title="Drop entries older than the retention setting">Clear &gt;Nd</button>
+          <button class="history-clear" data-action="clear-history" type="button" data-i18n="history.clear" data-i18n-title="history.clear_confirm">Clear all</button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+        <div class="history-empty" id="historyEmpty" style="display:none" data-i18n="history.empty">
+          No history yet. Closed tabs will appear here.
+        </div>
+      </div>
+    </section>
+
+  </main><!-- end .dashboard-stack -->
+
+
+  <!-- ================================================================
+       INSIGHTS — close history stats (today / week / total + top domains)
+       ================================================================ -->
+  <section class="insights-banner" id="insightsBanner" style="display:none">
+    <div class="insights-head">
+      <h2 class="insights-title" data-i18n="insights.title">Insights</h2>
+      <button class="insights-clear" data-action="clear-insights" data-i18n-title="insights.clear" type="button" aria-label="Clear insights">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 0 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+      </button>
+    </div>
+    <div class="insights-grid">
+      <div class="insight-stat">
+        <div class="insight-value" id="insightToday">0</div>
+        <div class="insight-label" data-i18n="insights.closed_today">closed today</div>
+      </div>
+      <div class="insight-stat">
+        <div class="insight-value" id="insightWeek">0</div>
+        <div class="insight-label" data-i18n="insights.closed_week">closed this week</div>
+      </div>
+      <div class="insight-stat">
+        <div class="insight-value" id="insightAll">0</div>
+        <div class="insight-label" data-i18n="insights.closed_total">total closed</div>
+      </div>
+      <div class="insight-block">
+        <div class="insight-block-title" data-i18n="insights.top_all">top domains (all time)</div>
+        <ol class="insight-list" id="insightTopAll"></ol>
+      </div>
+      <div class="insight-block">
+        <div class="insight-block-title" data-i18n="insights.top_week">top this week</div>
+        <ol class="insight-list" id="insightTopWeek"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FOOTER — global stats + refresh control
+       ================================================================ -->
+  <footer>
+  </footer>
+
+</div><!-- end .container -->
+
+<!-- ================================================================
+     TOAST — floats above everything, used for action confirmations
+     Hidden by default via CSS (opacity:0, translateY)
+     ================================================================ -->
+<div class="toast" id="toast">
+  <!-- Checkmark circle icon (Heroicons outline) -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+  </svg>
+  <span id="toastText"></span>
+</div>
+
+<!-- ================================================================
+     AUTHOR BADGE — bottom-right X link (replaces the footer attribution)
+     ================================================================ -->
+<a class="author-x-badge" id="authorXBadge" href="https://x.com/CY_Chase_AI" target="_blank" rel="noopener" data-i18n-title="author.x_tooltip" title="Follow 承越.Chase on X" aria-label="Follow on X">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+</a>
+
+<!-- ================================================================
+     SETTINGS PANEL — right-side slide-in panel for user preferences
+     Hidden by default; settings-ui.js opens it on gear click
+     ================================================================ -->
+<div class="settings-overlay" id="settingsOverlay" style="display:none"></div>
+
+<!-- ================================================================
+     BOOKMARK DIALOG — center modal, mimics Chrome's Ctrl+D flow
+     Hidden by default; app.js showBookmarkDialog() opens it
+     ================================================================ -->
+<div class="bookmark-overlay" id="bookmarkOverlay" style="display:none"></div>
+<div class="bookmark-modal" id="bookmarkModal" style="display:none" role="dialog" aria-labelledby="bookmarkModalTitle">
+  <header class="bookmark-modal-header">
+    <h2 id="bookmarkModalTitle" data-i18n="bookmark.title">Add bookmark</h2>
+    <button class="bookmark-modal-close" data-action="close-bookmark-modal" type="button" aria-label="Close">×</button>
+  </header>
+  <div class="bookmark-modal-body">
+    <label class="bookmark-modal-field">
+      <span data-i18n="bookmark.name_label">Name</span>
+      <input type="text" id="bookmarkNameInput" class="bookmark-modal-input" autocomplete="off">
+    </label>
+    <label class="bookmark-modal-field">
+      <span data-i18n="bookmark.folder_label">Folder</span>
+      <div class="bookmark-tree" id="bookmarkTree" role="tree" data-selected-id=""></div>
+    </label>
+    <div class="bookmark-modal-error" id="bookmarkError" style="display:none"></div>
+  </div>
+  <footer class="bookmark-modal-footer" id="bookmarkModalFooter">
+    <button class="bookmark-modal-btn secondary" data-action="close-bookmark-modal" type="button" data-i18n="bookmark.cancel">Cancel</button>
+    <button class="bookmark-modal-btn primary" data-action="save-bookmark" type="button" data-i18n="bookmark.save">Save</button>
+  </footer>
+</div>
+<aside class="settings-panel" id="settingsPanel" style="display:none" aria-label="Settings">
+  <header class="settings-header">
+    <h2 data-i18n="settings.title">Settings</h2>
+    <button class="settings-close" data-action="close-settings" type="button" aria-label="Close">×</button>
+  </header>
+  <div class="settings-body" id="settingsBody">
+    <!-- Rendered by settings-ui.js -->
+  </div>
+</aside>
+
+<!-- Personal config (gitignored) — defines LOCAL_LANDING_PAGE_PATTERNS etc. -->
+<!-- If the file doesn't exist, app.js falls back to an empty array (see LOCAL_LANDING_PAGE_PATTERNS fallback in app.js). -->
+<script src="config.local.js"></script>
+
+<!-- i18n (sync-loaded before app.js so t() is available everywhere) -->
+<script src="i18n.js"></script>
+
+<!-- Settings storage + aggregation logic (sync-loaded before app.js) -->
+<script src="settings.js"></script>
+
+<!-- Main dashboard logic — loads last so the DOM is ready -->
+<script src="app.js"></script>
+
+<!-- Settings UI (gear icon + slide-in panel) -->
+<script src="settings-ui.js"></script>
+</body>
+</html>
