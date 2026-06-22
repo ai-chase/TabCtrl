@@ -618,6 +618,28 @@
     // (e.g. if the new-tab page updates settings in another window).
     ensureRefs();
     render().catch(() => {});
+
+    // Back-to-Home link — intercept clicks. `chrome://newtab` is blocked
+    // as an extension page href (it's an internal scheme, not web),
+    // so we can't rely on a plain anchor. Instead: window.close() the
+    // current settings tab. Chrome will fall back to the previous tab
+    // in the tab strip, which is normally the Home (new-tab) page —
+    // this is the same pattern 1Password / uBlock Origin use.
+    // Fallback if window.close is blocked: open the Home URL explicitly.
+    const back = document.getElementById('settingsBackLink');
+    if (back) {
+      back.addEventListener('click', (e) => {
+        e.preventDefault();
+        try { window.close(); } catch (_) {}
+        setTimeout(() => {
+          try {
+            chrome.tabs.create({ url: chrome.runtime.getURL('index.html') });
+          } catch (_) {
+            window.location.href = chrome.runtime.getURL('index.html');
+          }
+        }, 80);
+      });
+    }
     if (chrome.storage && chrome.storage.onChanged) {
       chrome.storage.onChanged.addListener((changes, namespace) => {
         if (namespace !== 'local') return;
