@@ -122,7 +122,7 @@ Open ⚙️ in the top-right corner.
 
 <div align="center">
 
-| Dashboard | Tab Stash |
+| Home | Tab Stash |
 |---|---|
 | *screenshot coming soon* | *screenshot coming soon* |
 
@@ -201,6 +201,22 @@ cd TabCtrl
 ### License
 
 [MIT](LICENSE) © 2026 Chase
+
+### About the Author
+
+<div align="center">
+
+<!-- AUTHOR PHOTO: drop your portrait into docs/author.png (square, 256×256+ recommended) -->
+<img src="docs/author.png" alt="Chase" width="128" height="128" style="border-radius: 50%;">
+
+**Chase** — a senior engineer building calm tools for information overload.
+Follow along on the journey from solo side project to a small product.
+
+[github.com/ai-chase](https://github.com/ai-chase) ·
+[Mastodon](https://mastodon.social/@chase) ·
+[email](mailto:hi@example.com)
+
+</div>
 
 ---
 
@@ -295,7 +311,7 @@ cd TabCtrl
 
 <div align="center">
 
-| 仪表盘 | 收藏的标签页 |
+| 主页 | 收藏的标签页 |
 |---|---|
 | *截图待补充* | *截图待补充* |
 
@@ -325,7 +341,7 @@ cd TabCtrl
 
 ### 使用
 
-安装后，每一个新标签页都会打开 TabCtrl 仪表盘。工具栏图标还会显示
+安装后，每一个新标签页都会打开 TabCtrl 主页。工具栏图标还会显示
 **当前打开标签页数量的彩色徽章**：
 
 - 🟢 绿色 — 1–10 个
@@ -372,6 +388,22 @@ cd TabCtrl
 ### 许可证
 
 [MIT](LICENSE) © 2026 Chase
+
+### 关于作者
+
+<div align="center">
+
+<!-- 作者照片：请把你的头像放到 docs/author.png（正方形，建议 256×256 以上） -->
+<img src="docs/author.png" alt="Chase" width="128" height="128" style="border-radius: 50%;">
+
+**Chase** — 资深工程师，致力于为信息过载打造「冷静」的工具。
+欢迎关注这个从个人副业走向小产品的旅程。
+
+[github.com/ai-chase](https://github.com/ai-chase) ·
+[Mastodon](https://mastodon.social/@chase) ·
+[email](mailto:hi@example.com)
+
+</div>
 
 ---
 
