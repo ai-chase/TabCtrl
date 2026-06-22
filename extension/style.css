@@ -438,23 +438,11 @@ header {
   line-height: 1.4;
   font-family: var(--font-body);
   transition: background 0.12s ease;
-  /* Explicitly fill the width of the parent flex item (mission-pages).
-     Without this, the outer flex layout collapses the chip to its minimum
-     content width (18px = favicon), squeezing chip-text and chip-actions out. */
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
 }
-/* In .mission-pages (column flex), `width: 100%` is treated as a
-   hint but the actual basis depends on the flex shorthand. Default
-   `flex: 0 1 auto` + width:100% SHOULD work, but on dupes chips
-   `flex: 0 0 auto` was being applied by some browser path, collapsing
-   them to min-content (18px = favicon). Force the basis to 100% on
-   the column-flex children so every chip claims the full row width. */
-.mission-pages > .page-chip {
-  flex: 1 1 100%;
-  flex-shrink: 1;
-}
+.mission-pages > .page-chip { flex: 1 1 100%; }
 .page-chip:hover {
   background: rgba(5, 150, 105, 0.06);   /* subtle sage highlight on row hover —2026-06-22 */
 }
