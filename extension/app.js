@@ -1997,7 +1997,7 @@ function renderSubgroupRow(sg, domain, domainId, fingerprintCounts, fingerprintB
           ${ICONS.close}
         </button>
       </div>
-      <div class="subgroup-chips" id="${rowId}" style="display:none">
+      <div class="subgroup-chips" id="${rowId}">
         ${tabChips}
       </div>
     </div>
@@ -2395,7 +2395,7 @@ function renderStashSubgroupRow(sg, domain, domainId, categories) {
         <span class="subgroup-label">${escapeHtml(label)}</span>
         <span class="subgroup-count">${countLabel}</span>
       </div>
-      <div class="subgroup-chips" id="${rowId}" style="display:none">
+      <div class="subgroup-chips" id="${rowId}">
         ${chips}
       </div>
     </div>
