@@ -443,6 +443,7 @@ header {
      content width (18px = favicon), squeezing chip-text and chip-actions out. */
   width: 100%;
   min-width: 0;  /* override column-flex default min-content (was 18px = favicon) */
+  flex-shrink: 1 !important;  /* override any inherited flex: 0 0 auto */
   box-sizing: border-box;
 }
 .page-chip:hover {
