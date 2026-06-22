@@ -459,7 +459,7 @@ header {
   background: rgba(5, 150, 105, 0.06);   /* subtle sage highlight on row hover —2026-06-22 */
 }
 
-.page-chip:last-child,
+.page-chip:last-child { border-bottom: none; }
 
 .chip-favicon {
   width: 18px;
