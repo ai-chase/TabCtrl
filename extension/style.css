@@ -438,6 +438,11 @@ header {
   line-height: 1.4;
   font-family: var(--font-body);
   transition: background 0.12s ease;
+  /* Explicitly fill the width of the parent flex item (mission-pages).
+     Without this, the outer flex layout collapses the chip to its minimum
+     content width (18px = favicon), squeezing chip-text and chip-actions out. */
+  width: 100%;
+  box-sizing: border-box;
 }
 .page-chip:hover {
   background: rgba(5, 150, 105, 0.06);   /* subtle sage highlight on row hover —2026-06-22 */
