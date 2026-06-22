@@ -198,7 +198,9 @@
 
       // History settings
       'settings.history':                       'History',
-      'settings.history_desc':                  'Closed-tab history is kept for a configurable number of days and shown 5 per page by default.',
+      'settings.record_history_label':          'Record close history',
+    'settings.record_history_desc':           'Only TabCtrl-driven closes are recorded. Native Chrome closes (Ctrl+W, clicking ×) are never recorded.',
+    'settings.history_desc':                  'Closed-tab history is kept for a configurable number of days and shown 5 per page by default.',
       'settings.history_retention_label':       'Keep closed-tab history for',
       'settings.history_days':                  'days',
       'settings.history_retention_hint':        'Older entries are pruned automatically. 1\u201330 days.',
@@ -426,7 +428,9 @@
 
       // History settings
       'settings.history':                       '历史记录',
-      'settings.history_desc':                  '历史记录保存的天数可配置，默认每页显示 5 条。',
+      'settings.record_history_label':          '记录关闭历史',
+    'settings.record_history_desc':           '只记录 TabCtrl 驱动的关闭。Chrome 原生关闭（Ctrl+W、点击×）不记录。',
+    'settings.history_desc':                  '历史记录保存的天数可配置，默认每页显示 5 条。',
       'settings.history_retention_label':       '历史记录保留',
       'settings.history_days':                  '天',
       'settings.history_retention_hint':        '超过保留天数的记录会自动清理。范围 1–30 天。',

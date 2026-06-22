@@ -737,6 +737,7 @@ async function closeDuplicateTabs(fingerprints, keepOne = true) {
     await chrome.tabs.remove(toClose);
   }
   await fetchOpenTabs();
+  return toCloseTabs;
 }
 
 /**
@@ -1187,6 +1188,55 @@ function showToast(message, options = {}) {
   toast._hideTimeout = setTimeout(() => {
     toast.classList.remove('visible');
   }, options.duration || 6000);
+}
+
+/**
+ * recordClose(tab, closeMethod) — tell the background service worker to
+ * persist this close in the rolling history (storage).
+ *
+ * Called explicitly from each TabCtrl close action (chip ×, Close N tabs,
+ * dedup). Native Chrome closes (clicking ×, Ctrl+W) are NOT recorded —
+ * background.js no longer listens to tabs.onRemoved for history.
+ *
+ * Stash-driven closes (defer-single-tab) do NOT call this function.
+ */
+function recordClose(tab, closeMethod) {
+  if (!tab || !tab.url) return;
+  // Skip chrome:// pages and extension pages — they are not useful in history
+  if (
+    tab.url.startsWith('chrome://') ||
+    tab.url.startsWith('chrome-extension://') ||
+    tab.url.startsWith('about:') ||
+    tab.url.startsWith('edge://') ||
+    tab.url.startsWith('brave://')
+  ) return;
+  chrome.runtime.sendMessage({
+    type: 'record-close',
+    tab:   { url: tab.url, title: tab.title || tab.url, favIconUrl: tab.favIconUrl || '' },
+    closeMethod: closeMethod || 'tab-ctrl',
+  }).catch(() => {});
+}
+
+/**
+ * recordBatchClose(tabs, closeMethod) — batch variant for bulk closes
+ * (Close N tabs, subgroup close, dedup). Sends one message per tab.
+ */
+function recordBatchClose(tabs, closeMethod) {
+  const recordable = (tabs || []).filter(t => t && t.url && (
+    t.url.startsWith('http://') ||
+    t.url.startsWith('https://') ||
+    t.url.startsWith('file://')
+  ));
+  if (recordable.length === 0) return;
+  chrome.runtime.sendMessage({
+    type: 'record-close-batch',
+    tabs: recordable.map(t => ({
+      url:        t.url,
+      title:      t.title || t.url,
+      favIconUrl: t.favIconUrl || '',
+    })),
+    closeMethod: closeMethod || 'tab-ctrl',
+  }).catch(() => {});
 }
 
 /**
@@ -3404,7 +3454,10 @@ document.addEventListener('click', async (e) => {
     // does NOT work for programmatically-closed tabs)
     const allTabs = await chrome.tabs.query({});
     const match   = allTabs.find(t => t.url === tabUrl);
-    if (match) await closeSingleTabAndTrack(match.id);
+    if (match) {
+      await closeSingleTabAndTrack(match.id);
+      recordClose(match, 'single-chip');
+    }
     await fetchOpenTabs();
 
     // Animate the chip row out
@@ -3467,11 +3520,6 @@ document.addEventListener('click', async (e) => {
     const allTabs = await chrome.tabs.query({});
     const match   = allTabs.find(t => t.url === tabUrl);
     if (match) {
-      // Tell the background service worker this close is stash-driven,
-      // so tabs.onRemoved should NOT record it in history.
-      try {
-        await chrome.runtime.sendMessage({ type: 'skip-history', tabId: match.id });
-      } catch {}
       await closeSingleTabAndTrack(match.id);
     }
     await fetchOpenTabs();
@@ -3647,7 +3695,8 @@ document.addEventListener('click', async (e) => {
     const tabsInSubgroup = group.tabs.filter(tab => getSubgroupKey(tab.url) === subgroupKey);
     if (tabsInSubgroup.length === 0) return;
     const urls = tabsInSubgroup.map(t => t.url);
-    await closeTabsByUrls(urls);
+    const closed = await closeTabsByUrls(urls);
+    recordBatchClose(closed, 'close-subgroup');
 
     // Animate the row out
     const row = actionEl.closest('.subgroup-row');
@@ -3697,11 +3746,13 @@ document.addEventListener('click', async (e) => {
     // must use exact URL matching to avoid closing unrelated tabs
     const useExact  = group.domain === '__landing-pages__' || !!group.label;
 
+    let closed;
     if (useExact) {
-      await closeTabsExact(urls);
+      closed = await closeTabsExact(urls);
     } else {
-      await closeTabsByUrls(urls);
+      closed = await closeTabsByUrls(urls);
     }
+    recordBatchClose(closed, 'close-domain');
 
     if (card) {
       animateCardOut(card);
@@ -3728,7 +3779,8 @@ document.addEventListener('click', async (e) => {
     const fps = fpsEncoded.split(',').map(u => decodeURIComponent(u)).filter(Boolean);
     if (fps.length === 0) return;
 
-    await closeDuplicateTabs(fps, true);
+    const closedTabs = await closeDuplicateTabs(fps, true);
+    recordBatchClose(closedTabs, 'dedup');
 
     // Hide the dedup button
     actionEl.style.transition = 'opacity 0.2s';

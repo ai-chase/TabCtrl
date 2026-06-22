@@ -168,7 +168,17 @@
   function renderHistorySettingsBody(settings) {
     const retention = settings.historyRetentionDays != null ? settings.historyRetentionDays : 7;
     const pageSize  = settings.historyPageSize != null ? settings.historyPageSize : 5;
+    const record    = settings.recordHistory !== false;  // default true
     return `
+      <div class="settings-history-row">
+        <label class="settings-history-label settings-toggle-row">
+          <input type="checkbox" id="recordHistory" ${record ? 'checked' : ''}>
+          <span data-i18n="settings.record_history_label">Record close history</span>
+        </label>
+        <p class="settings-section-desc" data-i18n="settings.record_history_desc">
+          Only TabCtrl-driven closes are recorded. Native Chrome closes (Ctrl+W, clicking ×) are never recorded.
+        </p>
+      </div>
       <div class="settings-history-row">
         <label class="settings-history-label">
           <span data-i18n="settings.history_retention_label">Keep closed-tab history for</span>
@@ -443,6 +453,13 @@
       settings.subGroupingEnabled = e.target.checked;
       await window.settingsAPI.saveSettings(settings);
       if (window.renderHome) await window.renderHome();
+      return;
+    }
+    // Checkbox: record close history
+    if (e.target.id === 'recordHistory') {
+      const settings = await window.settingsAPI.getSettings();
+      settings.recordHistory = e.target.checked;
+      await window.settingsAPI.saveSettings(settings);
       return;
     }
     // Number: history retention (1-30 days)

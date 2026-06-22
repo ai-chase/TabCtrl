@@ -72,6 +72,7 @@
     subGroupingEnabled:   false,
     subGroupingRules:     DEFAULT_SUB_GROUPING_RULES.slice(),  // user-overridable; built-ins are kept for transparency
     language:             'auto',     // 'auto' | 'en' | 'zh' — UI mirror of i18n's STORAGE_KEY
+    recordHistory:        true,       // record close events to history (TabCtrl-driven closes only)
     archiveRetentionDays: 90,         // legacy, kept for migration
     historyRetentionDays: 7,          // auto-prune closed-tab history older than this (1-30)
     historyPageSize:      5,          // how many closed-tab entries to show per page (3-20)
@@ -294,6 +295,7 @@
       subGroupingEnabled:   obj.subGroupingEnabled === true,
       subGroupingRules:     subGroupingRules,
       language:             obj.language || DEFAULT_SETTINGS.language,
+      recordHistory:        typeof obj.recordHistory === 'boolean' ? obj.recordHistory : DEFAULT_SETTINGS.recordHistory,
       archiveRetentionDays: (typeof retention === 'number') ? retention : DEFAULT_SETTINGS.archiveRetentionDays,
       historyRetentionDays: historyRetentionDays,
       historyPageSize:      historyPageSize,
