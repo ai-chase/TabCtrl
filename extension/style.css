@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    TabCtrl —Hand-Drawn Design System
 
    Applies the hand-drawn spec faithfully while keeping it usable
@@ -7,7 +7,7 @@
    - Hard offset shadows on interactive elements (4px 4px 0 0)
    - Handwritten typography (Kalam headings + Patrick Hand body)
    - Subtle paper-grain dot texture on the background
-   - Playful rotations (-0.5掳 to 0.5掳 on cards)
+   - Playful rotations (-0.5° to 0.5° on cards)
    - Post-it yellow + tape decorations for personality
    - Long-domain handling: nowrap + ellipsis (no wrap-driven blow-up)
    ============================================================ */
@@ -27,7 +27,6 @@
   --card-bg:      #ffffff;
   --border:       #18181b;   /* ink text/border —deepened from #2d2d2d for stronger contrast */
   --hover-red:    #b91c1c;   /* close-button hover red (darker than --accent) —2026-06-22 */
-
 
   /* === Hard Offset Shadows (NO blur, ever) === */
   --shadow-xs:    2px 2px 0px 0px #18181b;
@@ -103,7 +102,6 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%;
 }
 
-/* ---- Header ---- */
 /* Header = 2-column grid.
    Left column: greeting + quote + date-card (stacked).
    Right column: vision card on top, settings button below.
@@ -125,88 +123,10 @@ header {
    the middle; the brand statement + settings sit on the right.
    They no longer compete for visual weight —each has a home. */
 
-.header-date {
-  grid-column: 1;
-  display: flex;
-  align-items: center;
-}
-
-.header-greeting {
-  grid-column: 2;
-  min-width: 0;     /* allow this column to shrink in narrow viewports */
-}
-
-.header-greeting h1 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 42px;
-  letter-spacing: -0.5px;
-  color: var(--ink);
-  margin-bottom: 6px;
-  line-height: 1.1;
-  /* Slight tilt for hand-placed feel */
-  transform: rotate(-0.5deg);
-  transform-origin: left center;
-}
-
-.header-right {
-  grid-column: 3;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 14px;
-  justify-self: end;
-}
-
 /* Date card —small 'torn-off calendar page' under the quote.
    Big day number on a red square + weekday + month next to it.
    No box-shadow (the previous design's shadow made it look like a
    small black blob, the boss's feedback). */
-.date-card {
-  display: inline-flex;
-  align-items: stretch;
-  background: var(--card-bg);
-  border: 2.5px solid var(--border);
-  border-radius: var(--wobbly-pebble);
-  font-family: var(--font-body);
-  overflow: hidden;
-  transform: rotate(-1deg);
-}
-.date-card-day {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--paper);
-  background: var(--accent);
-  padding: 8px 14px 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 52px;
-  line-height: 1;
-  border-right: 2.5px solid var(--border);
-  font-variant-numeric: tabular-nums;
-}
-.date-card-info {
-  padding: 6px 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: 1.2;
-  min-width: 60px;
-}
-.date-card-weekday {
-  font-family: var(--font-heading);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.date-card-month {
-  font-family: var(--font-body);
-  font-size: 11px;
-  color: var(--muted-soft);
-  margin-top: 2px;
-}
 
 /* Settings (gear) button —fixed top-right corner, always accessible.
    Replaces the entire header (greeting / quote / date / vision) that
@@ -369,43 +289,6 @@ header {
   transform: translate(2px, 2px);
 }
 
-/* ---- Nudge banner (legacy) ---- */
-.nudge-banner {
-  background: rgba(255, 77, 77, 0.06);
-  border: 2.5px dashed var(--accent);
-  border-radius: var(--wobbly-md);
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 40px;
-}
-
-.nudge-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 77, 77, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.nudge-icon svg {
-  width: 18px;
-  height: 18px;
-  color: var(--accent);
-}
-
-.nudge-text {
-  font-size: 16px;
-  color: var(--ink);
-  line-height: 1.5;
-}
-
-.nudge-text strong { font-weight: 700; }
-
 /* ---- Section Headers ---- */
 .section-header {
   display: flex;
@@ -445,7 +328,6 @@ header {
   font-weight: 700;
 }
 
-/* ---- Mission Cards (the main dashboard cards) ---- */
 .missions {
   columns: 320px;
   column-gap: 20px;
@@ -523,24 +405,6 @@ header {
   white-space: nowrap;
 }
 
-.mission-tag {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border: 2px solid var(--border);
-  border-radius: var(--wobbly-sm);
-  background: var(--card-bg);
-  font-family: var(--font-heading);
-  flex-shrink: 0;
-}
-
-.mission-tag.active    { background: var(--sage); color: var(--card-bg); }
-.mission-tag.cooling   { background: var(--postit); color: var(--ink); }
-.mission-tag.abandoned { background: var(--accent); color: white; }
-.mission-tag.neutral   { color: var(--ink-soft); background: var(--muted); }
-
 .open-tabs-badge {
   display: inline-flex;
   align-items: center;
@@ -558,16 +422,8 @@ header {
 
 .open-tabs-badge svg { width: 12px; height: 12px; }
 
-.mission-summary {
-  font-size: 14px;
-  color: var(--ink-soft);
-  line-height: 1.5;
-  margin-bottom: 6px;
-}
-
 .mission-pages { display: flex; flex-direction: column; gap: 0; }
 
-/* ---- Page Chip (each individual tab row) ---- */
 .page-chip {
   font-size: 14px;
   color: var(--ink);
@@ -588,7 +444,6 @@ header {
 }
 
 .page-chip:last-child,
-.page-chip-overflow { border-bottom: none; }
 
 .chip-favicon {
   width: 18px;
@@ -671,7 +526,7 @@ header {
   background: rgba(212, 165, 46, 0.25);
 }
 
-/* Same for stash chips (鈽?vs 鈽? */
+/* Same for stash chips (—?vs —? */
 .stash-chip-action.bookmarked {
   color: #b88a1a;
 }
@@ -681,17 +536,6 @@ header {
 
 .page-chip.clickable { cursor: pointer; transition: background 0.12s; }
 .page-chip.clickable:hover { background: rgba(255, 77, 77, 0.05); }
-
-.page-chip-overflow {
-  font-size: 12px;
-  color: var(--muted-soft);
-  padding: 6px 4px;
-  font-style: italic;
-  cursor: pointer;
-}
-.page-chip-overflow:hover { color: var(--ink); }
-
-.mission-time { font-size: 12px; color: var(--muted-soft); margin-bottom: 4px; }
 
 .mission-page-count {
   font-family: var(--font-heading);
@@ -770,7 +614,6 @@ header {
 }
 .action-btn.save-tabs { background: rgba(5, 150, 105, 0.12); }   /* sage tint updated —2026-06-22 */
 
-/* ---- Toast (post-it style) ---- */
 .toast {
   position: fixed;
   bottom: 32px;
@@ -802,7 +645,6 @@ header {
 
 .toast svg { width: 18px; height: 18px; color: var(--sage); }
 
-/* ---- Footer ---- */
 footer {
   margin-top: 48px;
   padding-top: 20px;
@@ -890,258 +732,9 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   font-family: var(--font-body);
 }
 
-/* ---- Update banner (legacy, unused) ---- */
-.update-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  background: rgba(122, 155, 110, 0.1);
-  border: 2.5px solid var(--sage);
-  border-radius: var(--wobbly-md);
-  padding: 10px 16px;
-  margin-bottom: 24px;
-}
-
-.update-banner-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.update-banner-icon { width: 16px; height: 16px; color: var(--sage); flex-shrink: 0; }
-.update-banner-text { font-size: 14px; color: var(--ink); font-family: var(--font-body); }
-.update-banner-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-
-.update-banner-btn {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 12px;
-  color: white;
-  background: var(--sage);
-  border: 2px solid var(--border);
-  border-radius: var(--wobbly-sm);
-  padding: 4px 12px;
-  cursor: pointer;
-  box-shadow: 1px 1px 0 0 var(--ink);
-  transition: all 0.12s ease;
-}
-
-.update-banner-btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 2px 2px 0 0 var(--ink);
-}
-
-.update-banner-btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: var(--shadow-press);
-}
-
-.update-banner-dismiss {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: 2px solid var(--border);
-  background: var(--card-bg);
-  cursor: pointer;
-  border-radius: var(--wobbly-pebble);
-  color: var(--ink);
-  transition: all 0.12s;
-  padding: 0;
-  flex-shrink: 0;
-  box-shadow: 1px 1px 0 0 var(--ink);
-}
-
-.update-banner-dismiss:hover {
-  background: var(--accent);
-  color: white;
-}
-
-.update-banner-dismiss svg { width: 14px; height: 14px; }
-
 /* (Old 2-column .dashboard-columns + .deferred-column —removed when the
    layout switched to a 3-section stack: open / saved / archive.
    Replaced by .dashboard-stack + .section-card above.) */
-
-.deferred-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 1.5px dashed var(--muted);
-  animation: fadeUp 0.3s ease both;
-  font-family: var(--font-body);
-}
-
-.deferred-item:last-child { border-bottom: none; }
-
-.deferred-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  border: 2.5px solid var(--border);
-  border-radius: var(--wobbly-pebble);
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-top: 1px;
-  transition: all 0.15s;
-  position: relative;
-  background: var(--card-bg);
-  box-shadow: 1px 1px 0 0 var(--ink);
-}
-
-.deferred-checkbox:hover {
-  border-color: var(--sage);
-  box-shadow: 2px 2px 0 0 var(--sage);
-}
-
-.deferred-checkbox:checked {
-  background: var(--sage);
-  border-color: var(--border);
-}
-
-.deferred-checkbox:checked::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 6px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-}
-
-.deferred-info { flex: 1; min-width: 0; }
-
-.deferred-title {
-  font-size: 15px;
-  color: var(--ink);
-  text-decoration: none;
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transition: color 0.15s;
-}
-
-.deferred-title:hover { color: var(--accent-2); }
-
-.deferred-meta { font-size: 12px; color: var(--muted-soft); margin-top: 2px; display: flex; gap: 8px; }
-
-.deferred-item.checked .deferred-title {
-  text-decoration: line-through;
-  text-decoration-style: wavy;
-  color: var(--muted-soft);
-}
-
-.deferred-item.checked .deferred-meta { opacity: 0.5; }
-
-.deferred-dismiss {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  color: var(--ink);
-  cursor: pointer;
-  padding: 3px;
-  opacity: 0.4;
-  transition: all 0.12s;
-  flex-shrink: 0;
-  margin-top: 1px;
-  border-radius: var(--wobbly-pebble);
-  box-shadow: 1px 1px 0 0 var(--ink);
-}
-
-.deferred-dismiss svg { width: 14px; height: 14px; display: block; }
-
-.deferred-dismiss:hover {
-  opacity: 1;
-  background: var(--accent);
-  color: white;
-  transform: translate(-1px, -1px);
-  box-shadow: 2px 2px 0 0 var(--ink);
-}
-
-.deferred-item.removing { opacity: 0; transform: translateX(20px); transition: opacity 0.3s, transform 0.3s; }
-
-.deferred-empty {
-  font-size: 14px;
-  color: var(--muted-soft);
-  font-style: italic;
-  padding: 24px 0;
-  text-align: center;
-  font-family: var(--font-body);
-}
-
-.deferred-archive { margin-top: 16px; padding-top: 12px; border-top: 2.5px dashed var(--ink); }
-
-.archive-toggle {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--ink);
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 0;
-  width: 100%;
-  text-align: left;
-  transition: color 0.15s;
-}
-
-.archive-toggle:hover { color: var(--accent); }
-
-.archive-chevron { width: 14px; height: 14px; transition: transform 0.2s; }
-.archive-toggle.open .archive-chevron { transform: rotate(180deg); }
-.archive-count { font-size: 11px; color: var(--muted-soft); opacity: 0.7; }
-.archive-body { padding-top: 12px; }
-
-.archive-search {
-  font-family: var(--font-body);
-  font-size: 13px;
-  width: 100%;
-  padding: 8px 12px;
-  border: 2.5px solid var(--border);
-  border-radius: var(--wobbly-pebble);
-  background: var(--card-bg);
-  color: var(--ink);
-  outline: none;
-  transition: all 0.15s;
-  margin-bottom: 12px;
-  box-shadow: 2px 2px 0 0 var(--ink);
-}
-
-.archive-search:focus {
-  border-color: var(--accent-2);
-  box-shadow: 3px 3px 0 0 var(--accent-2);
-}
-
-.archive-search::placeholder { color: var(--muted-soft); }
-
-.archive-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 0;
-  border-bottom: 1.5px dashed var(--muted);
-}
-
-.archive-item:last-child { border-bottom: none; }
-
-.archive-item-title {
-  font-size: 13px;
-  color: var(--ink-soft);
-  text-decoration: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  flex: 1;
-  min-width: 0;
-  transition: color 0.15s;
-}
-
-.archive-item-title:hover { color: var(--ink); }
-.archive-item-date { font-size: 11px; color: var(--muted-soft); flex-shrink: 0; }
 
 /* ---- Subgroups (path-based clustering) ---- */
 .mission-subgroups {
@@ -1535,7 +1128,6 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
 @media (max-width: 600px) {
   .container { padding: 24px 16px 60px; }
   header { flex-direction: column; gap: 16px; align-items: flex-start; }
-  .header-left h1 { font-size: 32px; }
   .missions { columns: 1; }
   /* Reset all card rotations on mobile —too cramped */
   .mission-card:nth-child(n) { transform: none; }
@@ -1770,7 +1362,6 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   grid-column: 1 / -1;
 }
 
-/* ---- Toast (extended with Undo button) ---- */
 .toast-undo-btn {
   margin-left: 10px;
   padding: 4px 12px;
@@ -1803,273 +1394,22 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
    + group headers + select-mode checkboxes
    ============================================================ */
 
-.archive-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: -4px 0 12px;
-  padding: 6px 0;
-}
-
-.archive-stats {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-  min-width: 0;
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--ink);
-  flex-wrap: wrap;
-}
-
-.archive-stat {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  white-space: nowrap;
-}
-
-.archive-stat strong {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--ink);
-}
-
-.archive-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.archive-action-btn {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 11px;
-  padding: 4px 10px;
-  background: var(--card-bg);
-  color: var(--ink);
-  border: 2px solid var(--border);
-  border-radius: var(--wobbly-pebble);
-  cursor: pointer;
-  box-shadow: 1px 1px 0 0 var(--ink);
-  transition: all 0.12s ease;
-  white-space: nowrap;
-  line-height: 1.2;
-}
-
-.archive-action-btn:hover {
-  background: var(--postit);
-  transform: translate(-1px, -1px);
-  box-shadow: 2px 2px 0 0 var(--ink);
-}
-
-.archive-action-btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: var(--shadow-press);
-}
-
-.archive-action-btn.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--border);
-}
-
-.archive-action-btn.danger {
-  color: var(--accent-rose);
-}
-
-.archive-action-btn.danger:hover {
-  background: var(--accent-rose);
-  color: white;
-}
-
 /* Bulk-action toolbar (slides up when items selected) */
-.archive-bulk-toolbar {
-  display: none;
-  position: sticky;
-  bottom: 8px;
-  margin-top: 12px;
-  padding: 10px 14px;
-  background: var(--ink);
-  color: var(--paper);
-  border: 3px solid var(--border);
-  border-radius: var(--wobbly-md);
-  box-shadow: var(--shadow);
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  z-index: 5;
-}
-
-.archive-bulk-toolbar.visible {
-  display: flex;
-  animation: bulkSlideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
 
 @keyframes bulkSlideUp {
   from { transform: translateY(20px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
 }
 
-.archive-bulk-text {
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--paper);
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.archive-bulk-num {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--paper);
-}
-
-.archive-bulk-buttons {
-  display: flex;
-  gap: 6px;
-}
-
-.archive-bulk-buttons .archive-action-btn {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.archive-bulk-buttons .archive-action-btn.danger {
-  background: var(--accent);
-  color: white;
-  border-color: var(--border);
-}
-
-.archive-bulk-buttons .archive-action-btn.danger:hover {
-  background: var(--accent-rose);
-}
-
 /* Date-group headers inside the active list */
-.archive-group-header {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 11px;
-  color: var(--ink);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  padding: 10px 0 6px;
-  margin-top: 6px;
-  border-top: 2px dashed var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.archive-group-header:first-child {
-  border-top: none;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.archive-group-header::after {
-  content: '';
-  flex: 1;
-  height: 0;
-  /* no extra line —dashed border-top already provides it */
-}
 
 /* ---- Item select mode ---- */
-.deferred-item.select-mode {
-  background: var(--accent-warm);
-  border-radius: var(--wobbly-pebble);
-  padding-left: 8px;
-  margin-left: -4px;
-  margin-right: -4px;
-  padding-right: 8px;
-  border: 2px solid transparent;
-  border-bottom-color: var(--muted);
-  cursor: pointer;
-}
-
-.deferred-item.select-mode .deferred-info {
-  cursor: pointer;
-}
-
-.deferred-item.select-mode:hover {
-  background: var(--postit);
-}
-
-.deferred-item.selected {
-  background: var(--accent);
-  color: var(--paper);
-  border-color: var(--border);
-}
-
-.deferred-item.selected .deferred-title,
-.deferred-item.selected .deferred-meta,
-.deferred-item.selected .deferred-meta span {
-  color: var(--paper);
-}
-
-.deferred-item.selected .deferred-title:hover {
-  color: var(--paper);
-}
 
 /* Select-mode checkbox (replaces the normal check-deferred one) */
-.deferred-select-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  border: 2.5px solid var(--border);
-  border-radius: var(--wobbly-pebble);
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-top: 1px;
-  position: relative;
-  background: var(--card-bg);
-  box-shadow: 1px 1px 0 0 var(--ink);
-  transition: all 0.12s;
-}
-
-.deferred-select-checkbox:hover {
-  border-color: var(--accent);
-  box-shadow: 2px 2px 0 0 var(--accent);
-}
-
-.deferred-select-checkbox:checked {
-  background: var(--accent);
-  border-color: var(--border);
-}
-
-.deferred-select-checkbox:checked::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 6px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-}
 
 /* Make the whole item clickable in select mode */
-.deferred-item.select-mode .deferred-info {
-  pointer-events: auto;
-}
-
-.deferred-item.select-mode .deferred-dismiss {
-  display: none;
-}
 
 /* Hide normal checkbox in select mode, hide select-checkbox in normal mode */
-.deferred-item:not(.select-mode) .deferred-select-checkbox {
-  display: none;
-}
 
 /* ---- Settings: section description ---- */
 .settings-section-desc {
@@ -2156,19 +1496,6 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   margin-bottom: 16px;
 }
 
-/* ---- Archive section body (inside archive-section) ---- */
-.archive-section-body {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.archive-section .archive-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
 /* ---- Performance optimizations ---- */
 
 /* Paper texture: scroll instead of fixed to avoid repaint on scroll */
@@ -2198,11 +1525,6 @@ body {
 /* Defer render of the .saved-section / .history-section's content
    until they enter the viewport —for users with many entries
    this skips rendering off-screen list items */
-.saved-list-cvp,
-.history-section .history-list {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 200px;
-}
 
 /* ---------- History section ---------- */
 .history-section-body {
@@ -2666,12 +1988,6 @@ body {
   box-shadow: 2px 2px 0 0 var(--ink);
 }
 
-.stash-chip-thumb {
-  /* Thumbnail support removed in commit 14d1e9d. Rule kept as a
-     no-op so old hand-written HTML still renders without breaking. */
-  display: none;
-}
-
 .stash-chip-position {
   display: inline-flex;
   align-items: center;
@@ -2745,7 +2061,7 @@ body {
 .stash-chip-title {
   /* Reset button defaults so the title looks and behaves like a link,
      but the click routes through the same stash-reopen handler as the
-     鈫?button (so it removes the item and restores scroll position). */
+     —?button (so it removes the item and restores scroll position). */
   flex: 1;
   min-width: 0;
   font-family: inherit;
@@ -2849,8 +2165,6 @@ body {
 /* Reduce the staggered fade-in delay chain —was 0.16s + 0.08s per
    .mission-card, now immediate to avoid long layout shifts */
 .active-section .missions .mission-card { animation-delay: 0s !important; }
-.deferred-item { animation-delay: 0s !important; }
-.archive-list .archive-item { animation-delay: 0s !important; }
 
 /* Remove the staggered animation on footer & insights headers */
 .tab-cleanup-banner,
@@ -2863,43 +2177,9 @@ footer { animation: none !important; }
    HEADER —greeting + quote + product vision layout
    ============================================================ */
 
-.header-left h1 {
-  /* unchanged: Kalam 700, large, slight tilt */
-  margin-bottom: 4px;
-}
-
-.greeting-quote {
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--ink-soft);
-  font-style: italic;
-  line-height: 1.4;
-  margin: 6px 0 4px;
-  max-width: 540px;
-}
-
-.header-product {
-  /* legacy class —kept as a no-op in case older code references it */
-}
-
 /* Product vision / brand statement —small unobtrusive label on
    the right of the header. No post-it, no big quote mark, no tilt —
    it's a brand tagline, not a feature. */
-.product-vision {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ink-soft);
-  font-style: normal;
-  line-height: 1.4;
-  margin: 0;
-  padding: 6px 12px;
-  background: transparent;
-  border: 1.5px dashed var(--border);
-  border-radius: 6px;
-  text-align: center;
-  max-width: 220px;
-}
 
 /* (Removed the ::after large closing quote in commit pending —
    the post-it was too prominent. The product-vision is now a
@@ -2911,9 +2191,6 @@ footer { animation: none !important; }
     grid-template-columns: 1fr;
     row-gap: 18px;
   }
-  .header-date, .header-greeting, .header-right { grid-column: 1; }
-  .header-right { justify-self: start; flex-wrap: wrap; }
-  .greeting-quote { max-width: 100%; }
 }
 
 .settings-history-section .settings-section-desc {
