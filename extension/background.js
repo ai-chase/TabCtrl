@@ -48,17 +48,29 @@ async function updateBadge() {
       );
     }).length;
 
-    await chrome.action.setBadgeText({ text: count > 0 ? String(count) : '' });
-    if (count === 0) return;
+    // (2026-06-22) set background color FIRST, then text — some Chrome versions
+    // wipe badge text when setBadgeBackgroundColor follows setBadgeText. Order
+    // matters here. See: https://issues.chromium.org/issues/40802528 (related).
+    let color = '#3d7a4a';           // green default
+    if (count > 10)      color = '#b8892e';   // amber 11–20
+    if (count > 20)      color = '#b35a5a';   // red 21+
 
-    let color;
-    if (count <= 10)      color = '#3d7a4a';
-    else if (count <= 20) color = '#b8892e';
-    else                  color = '#b35a5a';
+    try {
+      await chrome.action.setBadgeBackgroundColor({ color });
+    } catch (bgErr) {
+      console.warn('[TabCtrl] setBadgeBackgroundColor failed:', bgErr);
+    }
 
-    await chrome.action.setBadgeBackgroundColor({ color });
-  } catch {
-    chrome.action.setBadgeText({ text: '' });
+    // Always set text LAST so it survives any color failure.
+    try {
+      await chrome.action.setBadgeText({ text: count > 0 ? String(count) : '' });
+    } catch (textErr) {
+      console.warn('[TabCtrl] setBadgeText failed:', textErr);
+    }
+  } catch (err) {
+    console.error('[TabCtrl] updateBadge outer failure:', err);
+    // Best-effort: clear badge on total failure
+    try { await chrome.action.setBadgeText({ text: '' }); } catch (_) {}
   }
 }
 
@@ -274,9 +286,17 @@ chrome.commands.onCommand.addListener((command) => {
 // Seed snapshots for already-open tabs at startup so we don't lose their
 // identity if they get closed before any onUpdated fires.
 (async () => {
+  // (2026-06-22) diagnostic log so we can confirm the service worker actually
+  // started and updateBadge ran. Visible in chrome://extensions → service worker
+  // console. Safe to leave in; logs are cheap and useful when debugging badge issues.
+  console.log('[TabCtrl] service worker starting (initial run)');
   try {
     const tabs = await chrome.tabs.query({});
+    console.log(`[TabCtrl] initial snapshot: ${tabs.length} tab(s) open`);
     for (const t of tabs) captureTabSnapshot(t);
-  } catch {}
-  updateBadge();
+  } catch (err) {
+    console.error('[TabCtrl] initial tabs.query failed:', err);
+  }
+  await updateBadge();
+  console.log('[TabCtrl] initial updateBadge() done');
 })();
