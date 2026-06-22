@@ -855,7 +855,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
 .subgroup-close svg { width: 12px; height: 12px; }
 
 .subgroup-chips {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 0;
   padding: 0 8px 8px 32px;
@@ -863,7 +863,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   margin-top: -2px;
 }
 
-.subgroup-row.open .subgroup-chips { display: flex; }
+.subgroup-row:not(.open) .subgroup-chips { display: none; }
 
 /* ---- Bookmark modal (mimics Chrome's Ctrl+D dialog) ---- */
 .bookmark-overlay {
