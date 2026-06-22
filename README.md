@@ -21,7 +21,7 @@ grouped by domain, with one-click stash, close history, and undo.
 [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](#tech-stack)
 [![Version](https://img.shields.io/badge/version-1.1.0-blue)](#)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#contributing)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#)
 [![No Backend](https://img.shields.io/badge/backend-none-9cf)](#privacy)
 
 [**English**](#english) · [**中文**](#中文)
@@ -53,8 +53,6 @@ Most tab managers force you to choose: kill tabs you might need, or drown in a h
 - [Privacy](#privacy)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Tech Stack](#tech-stack)
-- [Contributing](#contributing)
-- [License](#license)
 
 ### Features
 
@@ -179,35 +177,6 @@ only because the Tabs API requires it to read tab titles and favicons — the da
 - `chrome.tabs` / `chrome.bookmarks` / `chrome.sessions` / `chrome.commands` APIs
 - Built-in i18n (中文 / English)
 
-### Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
-
-```bash
-git clone https://github.com/ai-chase/TabCtrl.git
-cd TabCtrl
-# Load extension/ as an unpacked extension in Chrome
-```
-
-### License
-
-[MIT](LICENSE) © 2026 Chase
-
-### About the Author
-
-<div align="center">
-
-<img src="docs/author.png" alt="Chase" width="128" height="128" style="border-radius: 50%;">
-
-**Chase** — a senior engineer building calm tools for information overload.
-Follow along on the journey from solo side project to a small product.
-
-[github.com/ai-chase](https://github.com/ai-chase) ·
-[Mastodon](https://mastodon.social/@chase) ·
-[email](mailto:hi@example.com)
-
-</div>
-
 ---
 
 <a name="中文"></a>
@@ -233,8 +202,6 @@ Follow along on the journey from solo side project to a small product.
 - [隐私](#隐私)
 - [快捷键](#快捷键)
 - [技术栈](#技术栈)
-- [贡献](#贡献)
-- [许可证](#许可证)
 
 ### 功能介绍
 
@@ -357,39 +324,3 @@ TabCtrl 目前还没有上架到 Chrome 应用商店。手动安装方式：
 - `chrome.tabs` / `chrome.bookmarks` / `chrome.sessions` / `chrome.commands` API
 - 内置 i18n（中文 / English）
 
-### 贡献
-
-欢迎 Pull Request。重大改动前请先开 Issue 讨论。
-
-```bash
-git clone https://github.com/ai-chase/TabCtrl.git
-cd TabCtrl
-# 在 Chrome 中以「加载已解压的扩展程序」方式加载 extension/ 文件夹
-```
-
-### 许可证
-
-[MIT](LICENSE) © 2026 Chase
-
-### 关于作者
-
-<div align="center">
-
-<img src="docs/author.png" alt="Chase" width="128" height="128" style="border-radius: 50%;">
-
-**Chase** — 资深工程师，致力于为信息过载打造「冷静」的工具。
-欢迎关注这个从个人副业走向小产品的旅程。
-
-[github.com/ai-chase](https://github.com/ai-chase) ·
-[Mastodon](https://mastodon.social/@chase) ·
-[email](mailto:hi@example.com)
-
-</div>
-
----
-
-<div align="center">
-
-**⭐ 如果这个项目对你有帮助，欢迎 Star！**
-
-</div>
