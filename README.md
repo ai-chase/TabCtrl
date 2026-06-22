@@ -1,166 +1,382 @@
+<div align="center">
+
+<img src="extension/icons/icon128.png" alt="TabCtrl logo" width="96" height="96">
+
 # TabCtrl
 
-**当标签页过载成为日常，TabCtrl 帮你回到清晰。**
+**When tab overload becomes the norm, TabCtrl brings you back to clarity.**
 
-*Tabs pile up. TabCtrl helps you see the floor.*
+> 当标签页过载成为日常，TabCtrl 帮你回到清晰。
 
-[English](#english) · [中文](#中文)
+A Chrome / Edge / Brave new-tab replacement that shows every open tab,
+grouped by domain, with one-click stash, close history, and undo.
+
+替换 Chrome / Edge / Brave 新标签页，按域名分组所有打开的标签页，
+支持一键暂存、关闭历史与撤销关闭。
+
+<br>
+
+<!-- BADGES — replace Chrome Web Store badge once published -->
+[![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](#tech-stack)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](#)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#contributing)
+[![No Backend](https://img.shields.io/badge/backend-none-9cf)](#privacy)
+
+[**English**](#english) · [**中文**](#中文)
+
+</div>
 
 ---
 
-## English {#english}
+<a name="english"></a>
 
-### What is TabCtrl?
+## 🇬🇧 English
 
-TabCtrl is a Chrome extension that replaces your **new tab page** with a live dashboard — showing all your open tabs grouped by domain, surfacing duplicates, and letting you stash tabs away without closing them.
+### Why TabCtrl?
 
-It's not a tab manager that hides your tabs. It's a **visibility layer** that sits on top of your existing workflow: see everything, decide what to keep, stash the rest.
+Most tab managers force you to choose: kill tabs you might need,
+or drown in a hundred-tab strip. **TabCtrl keeps them all open, but
+makes them visible and reachable from the new tab page itself.**
+
+- See every open tab grouped by site, not as a flat list
+- Stash tabs you want to come back to (with scroll position saved)
+- Reopen anything you closed in the last 1–30 days
+- 100% local. No account, no server, no telemetry
+
+### Table of Contents
+
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Privacy](#privacy)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
+- [Tech Stack](#tech-stack)
+- [Contributing](#contributing)
+- [License](#license)
 
 ### Features
 
-#### 🗂 Domain Grouping
-Tabs are automatically grouped by main domain (`google.com` instead of `mail.google.com`, `docs.google.com`, `calendar.google.com`). One card, one domain, no tab bar scrolling.
+#### 1. Open Tabs — "Right now"
 
-#### 🏠 Smart Landing Page Detection
-Landing pages (Gmail inbox, Twitter/X home, GitHub dashboard, YouTube front page) get their own group so you can close "all those Twitter tabs" without touching the ones you're actually reading.
+The new tab page becomes a live dashboard of every open tab,
+**grouped by domain**.
 
-#### 🔁 Duplicate Tab Detection
-Tabs with the same content are surfaced with a **duplicate badge**. Detection uses URL fingerprinting (SHA-256, first 16 hex chars) with aggressive tracking-param normalization (`utm_*`, `fbclid`, `ref`, etc. are stripped before comparison).
-
-#### 📌 Tab Stash
-Save tabs for later — they stay in Chrome storage, survive browser restarts, and can be organized into categories. Reopen them when you need them. Stashed tabs keep their **scroll position** when reopened (via `chrome.scripting.executeScript`).
-
-#### ⏪ Tab History & Undo
-Every closed tab is recorded to a rolling history (default 7 days, configurable up to 30). Click any entry to reopen it. Keyboard shortcut `Ctrl+Shift+T` reopens the last closed tab.
-
-#### 🏷️ URL Sub-Grouping
-Inside each domain card, tabs are further grouped by URL path:
-- GitHub repos (`owner/repo`)
-- YouTube channels (`@channel`)
-- Subreddits (`r/subreddit`)
-- X/Twitter profiles (`@username`)
-- Stack Overflow questions
-
-#### 🔖 Bookmark Dialog
-Built-in modal for saving bookmarks (Ctrl+D flow). Shows your full bookmark folder tree, lets you pick a folder, and marks tabs as bookmarked with a visual indicator.
-
-#### 🌐 Bilingual
-Full Chinese + English support. Auto-detects your browser language, or set it manually in Settings.
-
-#### ✨ Hand-Drawn Aesthetic
-Warm paper background, wobbly borders, handwritten fonts (Kalam + Patrick Hand). Built to feel human, not clinical.
-
-### How It Works
-
-1. **Open a new tab** → TabCtrl dashboard shows all your open tabs
-2. **Grouped by domain** → see how many tabs per site at a glance
-3. **Spot duplicates** → duplicate badge on repeat content
-4. **Stash tabs** → click ⏰ to save for later; they're removed from your tab bar but kept in storage
-5. **Reopen later** → tabs restore with their original scroll position
-6. **Closed accidentally?** → history section at the bottom, click to reopen
-
-### Permissions
-
-| Permission | Why |
+| Action | How |
 |---|---|
-| `tabs` | Read URL/title of open tabs for grouping |
-| `activeTab` | Access current tab for screenshot/script injection |
-| `storage` | Persist stashed tabs, settings, and history |
-| `sessions` | `chrome.sessions.restore()` for undo-close |
-| `scripting` | Capture and restore scroll positions |
-| `bookmarks` | Read/write bookmark tree for the bookmark dialog |
+| Switch to a tab | Click the tab title |
+| Close a single tab | Click the **×** on the tab card |
+| Close an entire site | Click **"Close N tabs"** on the site card |
+| Deduplicate duplicates | One click collapses all tabs pointing to the same URL |
+| Stash a tab | Click the bookmark icon to save for later |
+| Add to Chrome Bookmarks | Click the star icon |
 
-No network access. No analytics. No cloud. Everything stays on your machine.
+**Grouping modes (configurable in Settings):**
+- **By main domain** — `mail.google.com` and `docs.google.com` group under `google.com`
+- **By full hostname** — subdomains stay separate
+- **With path subgroups** — GitHub renders as `owner/repo`, YouTube as `@channel`
 
-### Settings
+#### 2. Tab Stash
 
-- **Grouping mode**: Merge subdomains (default) · Separate subdomains · Custom rules
-- **Sub-grouping**: Toggle on/off, add your own URL → label rules
-- **History retention**: 1–30 days
-- **Language**: Auto · English · 中文
+Save tabs you want to come back to. They keep their title, favicon, and—
+importantly—**the exact scroll position you left them at**, so reopening
+feels like you never left.
+
+- Custom categories (e.g. *Reading*, *Projects*, *Shopping*)
+- Drag-and-drop cards between categories
+- Search across stashed tabs
+- Stashing the same page multiple times increments a counter;
+  click to see the history of that page
+
+#### 3. Close History
+
+Every tab close is recorded automatically.
+
+- Default 7-day retention (configurable 1–30 days)
+- Grouped by *Today / Yesterday / This week / Earlier*
+- Sort by domain or time
+- Reopen individually or in batch
+- Bulk-clean entries older than N days
+
+#### 4. Undo Close
+
+Closed something by accident? Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>
+(<kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> on macOS) to reopen it instantly.
+
+#### 5. Settings
+
+Open ⚙️ in the top-right corner.
+
+| Option | Description |
+|---|---|
+| Language | 中文 / English / Follow browser |
+| Tab grouping | Main domain / Full hostname / Custom rules |
+| Subgroup by path | GitHub repos, YouTube channels, etc. shown as separate rows |
+| Custom rules | Map any domain → custom group name |
+| History retention | 1–30 days |
+| Items per page | 3–20 |
+
+### Screenshots
+
+<div align="center">
+
+| Dashboard | Tab Stash |
+|---|---|
+| *screenshot coming soon* | *screenshot coming soon* |
+
+</div>
+
+> 📸 Drop your screenshots into [`docs/screenshots/`](docs/screenshots/)
+> and they'll be picked up by the README above.
+
+### Installation
+
+#### From source (current method)
+
+1. Open Chrome and visit `chrome://extensions`
+2. Enable **Developer mode** (top-right toggle)
+3. Click **Load unpacked**
+4. Select the `extension/` folder in this repository
+
+That's it. New tabs now open TabCtrl.
+
+#### From Chrome Web Store
+
+*Coming soon — not yet published.*
+
+#### Update
+
+Visit `chrome://extensions`, find the TabCtrl card, click **Reload**.
+
+### Usage
+
+Once installed, every new tab opens the TabCtrl dashboard. The toolbar
+icon also shows a **color-coded badge** of your current open tab count:
+
+- 🟢 Green — 1–10 tabs
+- 🟡 Amber — 11–20 tabs
+- 🔴 Red — 21+ tabs
+
+### Privacy
+
+**TabCtrl is 100% local.** Nothing is ever uploaded.
+
+- Open tab data — read via Chrome Tabs API, never sent anywhere
+- Stashed tabs — stored in `chrome.storage.local`, never sent anywhere
+- Close history — stored in `chrome.storage.local`, never sent anywhere
+- No account, no network calls, no analytics
+
+See [`manifest.json`](extension/manifest.json) for the exact permission
+list. Host permissions cover `<all_urls>` only because `tabs.query`
+needs them to read tab titles and favicons — the data stays in your
+browser.
+
+### Keyboard Shortcuts
+
+| Shortcut (Win / Linux) | Shortcut (macOS) | Action |
+|---|---|---|
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | Reopen last closed tab |
+
+### Tech Stack
+
+- **Manifest V3** service worker architecture
+- Vanilla JavaScript — no framework, no build step
+- `chrome.storage.local` for persistence
+- `chrome.tabs` / `chrome.bookmarks` / `chrome.sessions` APIs
+- i18n built in (中文 / English)
+
+### Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you'd like to change.
+
+```bash
+git clone https://github.com/ai-chase/TabCtrl.git
+cd TabCtrl
+# Load the extension/ folder as an unpacked extension in Chrome
+```
+
+### License
+
+[MIT](LICENSE) © 2026 Chase
 
 ---
 
-## 中文 {#中文}
+<a name="中文"></a>
 
-### TabCtrl 是什么？
+## 🇨🇳 中文
 
-TabCtrl 是一个 Chrome 扩展，将你的 **新标签页** 替换为一个实时仪表盘——展示所有已打开的标签页、按域名分组、标记重复标签、暂存标签以备后用。
+### 为什么需要 TabCtrl？
 
-它不是那种"把标签藏起来"的标签管理器。它是一个 **可见性增强工具**：看清所有标签，决定留什么，把其他的暂存起来。
+大多数标签页管理器让你二选一：杀掉可能需要的标签，或者淹没在
+一百个标签里。**TabCtrl 让你保留所有标签，但让它们在「新标签页」
+里清晰可见、一触即达。**
 
-### 核心功能
+- 看到每一个打开的标签页，按网站分组，不是平铺列表
+- 暂存稍后想看的标签页（连滚动位置都记住）
+- 1–30 天内关闭过的标签页都能找回
+- 100% 本地，零账号、零服务器、零遥测
 
-#### 🗂 域名聚合
-标签页按主域名自动分组（`google.com` 代替 `mail.google.com`、`docs.google.com`、`calendar.google.com`）。一张卡片、一个域名，不用再滚标签栏。
+### 目录
 
-#### 🏠 落地页智能识别
-落地页（Gmail 收件箱、Twitter/X 首页、GitHub 仪表盘、YouTube 首页）独立成组，方便你关闭"所有 Twitter 标签"而不影响正在看的标签。
+- [功能介绍](#功能介绍)
+- [截图](#截图)
+- [安装](#安装)
+- [使用](#使用)
+- [配置项](#配置项)
+- [隐私](#隐私)
+- [快捷键](#快捷键)
+- [技术栈](#技术栈)
+- [贡献](#贡献)
+- [许可证](#许可证)
 
-#### 🔁 重复标签检测
-相同内容的标签页会显示 **重复徽章**。检测基于 URL 指纹（SHA-256，取前 16 位十六进制）配合追踪参数归一化（`utm_*`、`fbclid`、`ref` 等在比对前会被剥离）。
+### 功能介绍
 
-#### 📌 标签暂存
-把标签存起来留待后用——保存在 Chrome 存储中，浏览器重启后依然在，可以分类整理。需要时重新打开。暂存的标签重新打开时会恢复**原始滚动位置**（通过 `chrome.scripting.executeScript` 实现）。
+#### 1. 打开的标签页 — Right now
 
-#### ⏪ 标签历史 & 撤销
-每个关闭的标签都会被记录到滚动历史（默认 7 天，可配置到 30 天）。点击任意记录即可重新打开。快捷键 `Ctrl+Shift+T` 重新打开上一个关闭的标签。
+新标签页直接变成**所有打开标签的实时仪表盘**，按域名分组。
 
-#### 🏷️ URL 子级分组
-在每个域名卡片内部，标签页会按 URL 路径进一步分组：
-- GitHub 仓库（`owner/repo`）
-- YouTube 频道（`@channel`）
-- Subreddit（`r/subreddit`）
-- X/Twitter 用户（`@username`）
-- Stack Overflow 问题
-
-#### 🔖 书签对话框
-内置书签保存弹窗（模拟 Chrome Ctrl+D 流程）。展示完整书签文件夹树，选择目标文件夹，已书签标签页会显示视觉标记。
-
-#### 🌐 双语支持
-完整中英文界面。自动检测浏览器语言，也可在设置中手动切换。
-
-#### ✨ 手绘风格设计
-温暖的纸张背景、波浪边框、手写字体（Kalam + Patrick Hand）。让它感觉亲切，而不是冷冰冰。
-
-### 工作原理
-
-1. **打开新标签页** → TabCtrl 仪表盘显示所有已打开标签
-2. **按域名分组** → 一眼看清每个站点开了多少标签
-3. **发现重复** → 重复内容标签显示重复徽章
-4. **暂存标签** → 点击 ⏰ 保存稍后查看；标签从标签栏移除但保存在存储中
-5. **稍后打开** → 标签恢复原始滚动位置
-6. **误关了？** → 底部历史区域，点击即可恢复
-
-### 权限说明
-
-| 权限 | 用途 |
+| 操作 | 方法 |
 |---|---|
-| `tabs` | 读取已打开标签的 URL 和标题，用于分组 |
-| `activeTab` | 当前标签页的脚本注入权限 |
-| `storage` | 保存暂存标签、设置和历史记录 |
-| `sessions` | `chrome.sessions.restore()` 实现撤销关闭 |
-| `scripting` | 捕获和恢复滚动位置 |
-| `bookmarks` | 读写书签树，实现书签对话框 |
+| 跳转到标签页 | 点击标签名称 |
+| 关闭单个标签 | 点击标签卡右侧的 **×** |
+| 关闭整个网站 | 点击网站卡片上的「**Close N tabs**」 |
+| 去重 | 一键折叠指向同一 URL 的重复标签 |
+| 收藏到 Tab Stash | 点击书签图标暂存 |
+| 添加到 Chrome 书签 | 点击星标图标 |
 
-无网络请求。无统计。无云端。全部数据保存在本地。
+**分组方式（可在设置里调整）：**
 
-### 设置项
+- **按主域名归组** — `mail.google.com` 和 `docs.google.com` 都归到 `google.com`
+- **按完整主机名归组** — 子域名分开显示
+- **按路径再细分** — GitHub 显示为 `owner/repo`，YouTube 显示为 `@频道名`
 
-- **分组模式**：合并子域名（默认）· 分离子域名 · 自定义规则
-- **子级分组**：开关控制，可添加自定义 URL → 标签名规则
-- **历史保留**：1–30 天
-- **界面语言**：跟随系统 · English · 中文
+#### 2. Tab Stash — 收藏的标签页
+
+把标签页暂存到这里，需要时再打开。保留原页面标题、图标，更重要的是—
+**连滚动位置都精确保存**，重新打开像从没离开过。
+
+- 自定义分类（如「阅读」「项目」「购物」）
+- 拖拽卡片在不同分类间移动
+- 跨分类搜索
+- 同一页面多次收藏显示收藏次数，点击可查看历史
+
+#### 3. 关闭历史 — History
+
+每次关闭标签页都会自动记录。
+
+- 默认保留 7 天（设置里 1–30 天可调）
+- 按时间分组：今天 / 昨天 / 本周 / 更早
+- 按域名或时间排序
+- 单条重开，或批量重开
+- 一键清理 N 天前的记录
+
+#### 4. 撤销关闭 — Undo
+
+误关标签页？按 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>
+（Mac 为 <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>）立即恢复。
+
+#### 5. 设置 — Settings
+
+打开右上角的 ⚙️。
+
+| 选项 | 说明 |
+|---|---|
+| 语言 | 中文 / English / 跟随浏览器 |
+| 标签页分组方式 | 主域名 / 完整主机名 / 自定义规则 |
+| 按路径细分 | GitHub 仓库、YouTube 频道等显示为独立行 |
+| 自定义规则 | 自定义域名 → 分组名称的映射 |
+| 历史保留天数 | 1~30 天 |
+| 每页显示条数 | 3~20 |
+
+### 截图
+
+<div align="center">
+
+| 仪表盘 | 收藏的标签页 |
+|---|---|
+| *截图待补充* | *截图待补充* |
+
+</div>
+
+> 📸 把截图丢进 [`docs/screenshots/`](docs/screenshots/) 目录，
+> README 就会自动引用。
+
+### 安装
+
+#### 从源码安装（当前方式）
+
+1. 打开 Chrome，访问 `chrome://extensions`
+2. 右上角开启「**开发者模式**」
+3. 点击「**加载已解压的扩展程序**」
+4. 选择本项目中的 `extension/` 文件夹
+
+安装完成后，新建标签页就会自动打开 TabCtrl。
+
+#### 从 Chrome 应用商店安装
+
+*即将上架 — 暂未发布。*
+
+#### 更新
+
+打开 `chrome://extensions`，点击 TabCtrl 卡片底部的「**重新加载**」即可。
+
+### 使用
+
+安装后，每一个新标签页都会打开 TabCtrl 仪表盘。工具栏图标还会显示
+**当前打开标签页数量的彩色徽章**：
+
+- 🟢 绿色 — 1–10 个
+- 🟡 琥珀色 — 11–20 个
+- 🔴 红色 — 21+ 个
+
+### 隐私
+
+**TabCtrl 完全本地化，数据绝不上传。**
+
+- 打开的标签页 — 通过 Chrome Tabs API 读取，不上传
+- 收藏的标签页 — 存在 `chrome.storage.local`，不上传
+- 关闭历史 — 存在 `chrome.storage.local`，不上传
+- 无需账号、无网络请求、无埋点分析
+
+详细权限列表见 [`manifest.json`](extension/manifest.json)。`host_permissions`
+声明 `<all_urls>` 是因为 `tabs.query` 读取标题和图标需要这个权限，
+数据始终留在你的浏览器里。
+
+### 快捷键
+
+| 快捷键 (Win / Linux) | 快捷键 (macOS) | 作用 |
+|---|---|---|
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | 重新打开上次关闭的标签页 |
+
+### 技术栈
+
+- **Manifest V3** Service Worker 架构
+- 原生 JavaScript — 无框架，无构建步骤
+- `chrome.storage.local` 持久化
+- `chrome.tabs` / `chrome.bookmarks` / `chrome.sessions` API
+- 内置 i18n（中文 / English）
+
+### 贡献
+
+欢迎 Pull Request。重大改动前请先开 Issue 讨论。
+
+```bash
+git clone https://github.com/ai-chase/TabCtrl.git
+cd TabCtrl
+# 在 Chrome 中以「加载已解压的扩展程序」方式加载 extension/ 文件夹
+```
+
+### 许可证
+
+[MIT](LICENSE) © 2026 Chase
 
 ---
 
-## Install / 安装
+<div align="center">
 
-1. Clone this repo
-2. Go to `chrome://extensions`
-3. Enable **Developer mode** (top right)
-4. Click **Load unpacked** → select the `extension` folder
+**⭐ 如果这个项目对你有帮助，欢迎 Star！**
 
-## License
-
-MIT
+</div>
