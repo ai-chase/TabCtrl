@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "TabCtrl",
   "version": "1.0.0",
-  "description": "Hand-drawn new tab page that turns tab overload into clarity: group by intent, archive cold tabs, undo your last close.",
+  "description": "当标签页过载成为日常，TabCtrl 帮你回到清晰。 When tab overload becomes the norm, TabCtrl brings you back to clarity.",
   "permissions": ["tabs", "activeTab", "storage", "sessions", "scripting", "bookmarks"],
   "host_permissions": ["<all_urls>"],
   "chrome_url_overrides": { "newtab": "index.html" },
