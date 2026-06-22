@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TabCtrl",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "当标签页过载成为日常，TabCtrl 帮你回到清晰。 When tab overload becomes the norm, TabCtrl brings you back to clarity.",
   "permissions": ["tabs", "activeTab", "storage", "sessions", "scripting", "bookmarks"],
   "host_permissions": ["<all_urls>"],
@@ -26,6 +26,10 @@
   },
   "commands": {
     "undo-close": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      },
       "description": "Reopen the most recently closed tab(s)"
     }
   }

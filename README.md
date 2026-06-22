@@ -19,7 +19,7 @@ grouped by domain, with one-click stash, close history, and undo.
 <!-- SSOT: Chinese is the source of truth. The English section below is reverse-synced from it.
      If you edit EN, please also update ZH, or vice versa. Last sync: 2026-06-22. -->
 [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](#tech-stack)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](#)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](#)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#contributing)
 [![No Backend](https://img.shields.io/badge/backend-none-9cf)](#privacy)
@@ -71,8 +71,9 @@ The new tab page becomes a live dashboard of every open tab,
 | Close a single tab | Click the **×** on the tab card |
 | Close an entire site | Click **"Close N tabs"** on the site card |
 | Deduplicate duplicates | One click collapses all tabs pointing to the same URL |
-| Stash a tab | Click the bookmark icon to save for later |
-| Add to Chrome Bookmarks | Click the star icon |
+| Stash a tab | Click the bookmark icon (▲) to save for later |
+| Add to Chrome Bookmarks | Click the star icon (★) to save with folder picker |
+| Undo close | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
 
 **Grouping modes (configurable in Settings):**
 - **By main domain** — `mail.google.com` and `docs.google.com` group under `google.com`
@@ -90,6 +91,8 @@ feels like you never left.
 - Search across stashed tabs
 - Stashing the same page multiple times increments a counter;
   click to see the history of that page
+- Auto-archive: tabs left in stash beyond the configured retention
+  period are cleaned up automatically on each new-tab open
 
 #### 3. Close History
 
@@ -173,7 +176,9 @@ browser.
 
 | Shortcut (Win / Linux) | Shortcut (macOS) | Action |
 |---|---|---|
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | Reopen last closed tab |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Reopen last closed tab |
+
+> **Note:** You can remap these in `chrome://extensions/shortcuts`.
 
 ### Tech Stack
 
@@ -256,8 +261,9 @@ Follow along on the journey from solo side project to a small product.
 | 关闭单个标签 | 点击标签卡右侧的 **×** |
 | 关闭整个网站 | 点击网站卡片上的「**Close N tabs**」 |
 | 去重 | 一键折叠指向同一 URL 的重复标签 |
-| 收藏到 Tab Stash | 点击书签图标暂存 |
-| 添加到 Chrome 书签 | 点击星标图标 |
+| 收藏到 Tab Stash | 点击书签图标 (▲) 暂存 |
+| 添加到 Chrome 书签 | 点击星标图标 (★) 并选择文件夹 |
+| 撤销关闭 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
 
 **分组方式（可在设置里调整）：**
 
@@ -274,6 +280,7 @@ Follow along on the journey from solo side project to a small product.
 - 拖拽卡片在不同分类间移动
 - 跨分类搜索
 - 同一页面多次收藏显示收藏次数，点击可查看历史
+- 自动归档：超过配置保留天数的暂存标签会在打开新标签页时自动清理
 
 #### 3. 关闭历史 — History
 
@@ -355,7 +362,9 @@ TabCtrl 目前还没有上架到 Chrome 应用商店。安装方式：
 
 | 快捷键 (Win / Linux) | 快捷键 (macOS) | 作用 |
 |---|---|---|
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> | 重新打开上次关闭的标签页 |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | 重新打开上次关闭的标签页 |
+
+> **注意：** 可以在 `chrome://extensions/shortcuts` 重新映射。
 
 ### 技术栈
 
