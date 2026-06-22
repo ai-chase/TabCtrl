@@ -82,7 +82,7 @@ Every new tab shows a live dashboard of every open tab, **grouped by domain**.
 
 Save tabs you want to come back to. They retain their **title, favicon, and exact scroll position**,
 so reopening feels like you never left.
-<img width="1920" height="1033" alt="chrome_vmR1r17rsQ" src="https://github.com/user-attachments/assets/8206a159-0325-4f61-b0fc-afbb35dbc65f" />
+
 - Custom categories (e.g. *Reading*, *Projects*, *Shopping*)
 - Drag-and-drop cards between categories
 - Search across stashed tabs
@@ -231,7 +231,7 @@ only because the Tabs API requires it to read tab titles and favicons — the da
 
 把标签页暂存到这里，需要时再打开。保留**标题、图标、和精确的滚动位置**，
 重新打开像从没离开过。
-![Uploading chrome_vmR1r17rsQ.gif…]()
+
 - 自定义分类（如「阅读」「项目」「购物」）
 - 拖拽卡片在不同分类间移动
 - 跨分类搜索
