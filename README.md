@@ -4,6 +4,8 @@
 
 # TabCtrl
 
+<img width="1672" height="941" alt="ChatGPT Image 2026年6月22日 22_00_02" src="https://github.com/user-attachments/assets/9c877dd8-1e95-4e05-a054-86491bd6eddf" />
+
 **When tab overload becomes the norm, TabCtrl brings you back to clarity.**
 
 > 当标签页过载成为日常，TabCtrl 帮你回到清晰。
