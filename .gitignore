@@ -5,5 +5,6 @@ node_modules/
 docs/superpowers/
 tmp/
 
-# Personal config (landing page patterns, etc.) — never push to GitHub
+# Personal config overrides — add LOCAL_LANDING_PAGE_PATTERNS, LOCAL_PINNED_TABS etc.
+# (config.defaults.js IS committed with safe empty values; config.local.js is for personal overrides)
 extension/config.local.js

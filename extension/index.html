@@ -237,10 +237,8 @@
 <!-- (settings-panel aside removed 2026-06-22 — see comment above) -->
 </aside>
 
-<!-- Personal config (gitignored) —defines LOCAL_LANDING_PAGE_PATTERNS etc. -->
-<!-- If the file doesn't exist, app.js falls back to an empty array (see LOCAL_LANDING_PAGE_PATTERNS fallback in app.js). -->
-<!-- `onerror` is allowed on <script> tags (it's an HTML attribute, not an inline event handler), so it survives MV3 CSP. -->
-<script src="config.local.js" onerror="/* file is gitignored + optional — silent fallback is intentional */"></script>
+<!-- Default config values — committed to repo. Users can override via config.local.js (gitignored). -->
+<script src="config.defaults.js"></script>
 
 <!-- i18n (sync-loaded before app.js so t() is available everywhere) -->
 <script src="i18n.js"></script>
