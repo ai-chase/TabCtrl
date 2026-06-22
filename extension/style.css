@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   TabCtrl 鈥?Hand-Drawn Design System
+   TabCtrl —Hand-Drawn Design System
 
    Applies the hand-drawn spec faithfully while keeping it usable
    as a productivity tool:
@@ -15,18 +15,18 @@
 :root {
   /* === Hand-Drawn Color Palette === */
   --paper:        #fdfbf7;   /* warm paper background */
-  --ink:          #18181b;   /* soft pencil black 鈥?never pure #000, deepened 2026-06-22 */
+  --ink:          #18181b;   /* soft pencil black —never pure #000, deepened 2026-06-22 */
   --ink-soft:     #5a5a5a;   /* secondary text */
   --muted:        #e5e0d8;   /* old paper / erased pencil */
-  --muted-soft:   #71717a;   /* hint text 鈥?deepened from #8a8a8a (2026-06-22) */
-  --accent:       #dc2626;   /* red 鈥?WCAG AA (4.5:1+) deepened from #ff4d4d */
-  --accent-2:     #1e40af;   /* blue ballpoint pen 鈥?deepened from #2d5da1 */
-  --postit:       #fde68a;   /* post-it yellow 鈥?deepened from #fff9c4 (no longer "white paper") */
-  --postit-soft:  #fef3c7;   /* tinted post-it 鈥?deepened from #fff3a0 */
-  --sage:         #059669;   /* success green 鈥?sharper, deeper than #7a9b6e */
+  --muted-soft:   #71717a;   /* hint text —deepened from #8a8a8a (2026-06-22) */
+  --accent:       #dc2626;   /* red —WCAG AA (4.5:1+) deepened from #ff4d4d */
+  --accent-2:     #1e40af;   /* blue ballpoint pen —deepened from #2d5da1 */
+  --postit:       #fde68a;   /* post-it yellow —deepened from #fff9c4 (no longer "white paper") */
+  --postit-soft:  #fef3c7;   /* tinted post-it —deepened from #fff3a0 */
+  --sage:         #059669;   /* success green —sharper, deeper than #7a9b6e */
   --card-bg:      #ffffff;
-  --border:       #18181b;   /* ink text/border 鈥?deepened from #2d2d2d for stronger contrast */
-  --hover-red:    #b91c1c;   /* close-button hover red (darker than --accent) 鈥?2026-06-22 */
+  --border:       #18181b;   /* ink text/border —deepened from #2d2d2d for stronger contrast */
+  --hover-red:    #b91c1c;   /* close-button hover red (darker than --accent) —2026-06-22 */
 
 
   /* === Hard Offset Shadows (NO blur, ever) === */
@@ -37,7 +37,7 @@
   --shadow-lg:    8px 8px 0px 0px #18181b;
   --shadow-press: 0px 0px 0px 0px #18181b;
 
-  /* === Wobbly Border-Radius (Restrained 鈥?not 255px "melting") === */
+  /* === Wobbly Border-Radius (Restrained —not 255px "melting") === */
   --wobbly-sm:    14px 6px 12px 6px / 6px 12px 6px 14px;     /* buttons */
   --wobbly-md:    22px 10px 18px 10px / 10px 18px 10px 22px; /* inputs / tabs */
   --wobbly-lg:    35px 14px 28px 14px / 14px 28px 14px 35px; /* big containers */
@@ -66,7 +66,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Paper grain 鈥?notebook dot pattern */
+  /* Paper grain —notebook dot pattern */
   background-image: radial-gradient(var(--muted) 1px, transparent 1px);
   background-size: 24px 24px;
   background-attachment: fixed;
@@ -95,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   z-index: 1;
   max-width: 100%;            /* fill the viewport so domain cards can use the full width */
-  margin: 0;                  /* no centering 鈥?cards extend to the edges */
+  margin: 0;                  /* no centering —cards extend to the edges */
   padding: 32px 32px 80px;    /* smaller top padding (header was removed) */
 }
 
@@ -123,7 +123,7 @@ header {
    [date-card] [greeting + quote]  [product-vision + settings]
    The date card anchors the left edge; greeting is the focus in
    the middle; the brand statement + settings sit on the right.
-   They no longer compete for visual weight 鈥?each has a home. */
+   They no longer compete for visual weight —each has a home. */
 
 .header-date {
   grid-column: 1;
@@ -158,7 +158,7 @@ header {
   justify-self: end;
 }
 
-/* Date card 鈥?small 'torn-off calendar page' under the quote.
+/* Date card —small 'torn-off calendar page' under the quote.
    Big day number on a red square + weekday + month next to it.
    No box-shadow (the previous design's shadow made it look like a
    small black blob, the boss's feedback). */
@@ -208,7 +208,7 @@ header {
   margin-top: 2px;
 }
 
-/* Settings (gear) button 鈥?fixed top-right corner, always accessible.
+/* Settings (gear) button —fixed top-right corner, always accessible.
    Replaces the entire header (greeting / quote / date / vision) that
    the user asked to remove on 2026-06-17. */
 .settings-btn {
@@ -248,7 +248,7 @@ header {
   height: 18px;
 }
 
-/* Settings button (inline variant) 鈥?sits inside hero-frame, not fixed.
+/* Settings button (inline variant) —sits inside hero-frame, not fixed.
    Replaces .settings-btn--fixed which poked through the page border.
    2026-06-22. */
 .settings-btn-inline {
@@ -303,7 +303,7 @@ header {
   transform: rotate(-0.4deg);
 }
 
-/* (Tape-on-top ::before removed 鈥?looked like a floating white block,
+/* (Tape-on-top ::before removed —looked like a floating white block,
    confused users. Banner itself is already visually distinct via
    post-it yellow + wobbly border + hard shadow.) */
 
@@ -469,7 +469,7 @@ header {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Per-card rotation 鈥?hand-placed feel */
+/* Per-card rotation —hand-placed feel */
 .mission-card:nth-child(3n)   { transform: rotate(-0.5deg); }
 .mission-card:nth-child(3n+1) { transform: rotate(0.4deg); }
 .mission-card:nth-child(3n+2) { transform: rotate(-0.2deg); }
@@ -502,7 +502,7 @@ header {
 }
 
 /* Single line + ellipsis. Long labels truncate with "..." rather than
-   shrinking font size 鈥?keeps visual rhythm consistent across cards. */
+   shrinking font size —keeps visual rhythm consistent across cards. */
 .mission-name {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -584,7 +584,7 @@ header {
   transition: background 0.12s ease;
 }
 .page-chip:hover {
-  background: rgba(5, 150, 105, 0.06);   /* subtle sage highlight on row hover 鈥?2026-06-22 */
+  background: rgba(5, 150, 105, 0.06);   /* subtle sage highlight on row hover —2026-06-22 */
 }
 
 .page-chip:last-child,
@@ -606,8 +606,8 @@ header {
   text-overflow: ellipsis;
   line-height: 1.4;
   font-size: 14px;
-  color: var(--ink);       /* explicit ink (no fade feel) 鈥?2026-06-22 */
-  font-weight: 500;        /* slight bump for clarity 鈥?2026-06-22 */
+  color: var(--ink);       /* explicit ink (no fade feel) —2026-06-22 */
+  font-weight: 500;        /* slight bump for clarity —2026-06-22 */
 }
 
 .chip-dupe-badge {
@@ -625,7 +625,7 @@ header {
   gap: 2px;
   flex-shrink: 0;
   margin-left: auto;
-  opacity: 0.55;          /* raised from 0.4 鈥?no longer "faded out" 鈥?2026-06-22 */
+  opacity: 0.55;          /* raised from 0.4 —no longer "faded out" —2026-06-22 */
   transition: opacity 0.15s;
 }
 
@@ -737,7 +737,7 @@ header {
 }
 
 .action-btn:hover {
-  background: var(--hover-red);    /* #b91c1c 鈥?deep red, white text contrast 6:1+ 鈥?2026-06-22 */
+  background: var(--hover-red);    /* #b91c1c —deep red, white text contrast 6:1+ —2026-06-22 */
   color: #ffffff;
   border-color: var(--hover-red);
   box-shadow: var(--shadow);
@@ -757,18 +757,18 @@ header {
 }
 .action-btn.primary:hover { background: var(--accent-2); }
 
-/* Close-all tabs button 鈥?postit yellow default + deep red hover.
+/* Close-all tabs button —postit yellow default + deep red hover.
    Old version had contrast issues (white-on-yellow); 2026-06-22 refresh. */
 .action-btn.close-tabs {
   background: var(--postit);     /* #fde68a, deepened from #fff9c4 */
   color: var(--ink);
 }
 .action-btn.close-tabs:hover {
-  background: var(--hover-red);  /* #b91c1c 鈥?strong contrast against white text */
+  background: var(--hover-red);  /* #b91c1c —strong contrast against white text */
   color: #ffffff;
   border-color: var(--hover-red);
 }
-.action-btn.save-tabs { background: rgba(5, 150, 105, 0.12); }   /* sage tint updated 鈥?2026-06-22 */
+.action-btn.save-tabs { background: rgba(5, 150, 105, 0.12); }   /* sage tint updated —2026-06-22 */
 
 /* ---- Toast (post-it style) ---- */
 .toast {
@@ -814,7 +814,7 @@ footer {
   gap: 16px;
 }
 
-/* (footer-stats / .stat / .stat-num / .stat-label 鈥?removed when
+/* (footer-stats / .stat / .stat-num / .stat-label —removed when
    the 'Open tabs' counter was dropped from the footer.) */
 }
 
@@ -849,7 +849,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   position: relative;
 }
 
-/* (Tape-on-top ::before removed 鈥?looked like a floating white block.) */
+/* (Tape-on-top ::before removed —looked like a floating white block.) */
 
 .empty-checkmark {
   width: 64px;
@@ -956,7 +956,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
 
 .update-banner-dismiss svg { width: 14px; height: 14px; }
 
-/* (Old 2-column .dashboard-columns + .deferred-column 鈥?removed when the
+/* (Old 2-column .dashboard-columns + .deferred-column —removed when the
    layout switched to a 3-section stack: open / saved / archive.
    Replaced by .dashboard-stack + .section-card above.) */
 
@@ -1266,36 +1266,6 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
 
 .subgroup-row.open .subgroup-chips { display: flex; }
 
-/* ============================================================
-   SETTINGS PANEL
-   ============================================================ */
-
-.settings-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(45, 45, 45, 0.4);
-  z-index: 998;
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-
-.settings-overlay.open { opacity: 1; }
-
-.settings-overlay {
-  /* Removed 2026-06-22: settings now live in a standalone options page,
-     so this slide-in overlay is no longer used. Kept commented for
-     historical reference only.
-  position: fixed;
-  inset: 0;
-  background: rgba(45, 45, 45, 0.4);
-  z-index: 998;
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-
-.settings-overlay.open { opacity: 1; }
-*/
-
 /* ---- Bookmark modal (mimics Chrome's Ctrl+D dialog) ---- */
 .bookmark-overlay {
   position: fixed;
@@ -1567,7 +1537,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   header { flex-direction: column; gap: 16px; align-items: flex-start; }
   .header-left h1 { font-size: 32px; }
   .missions { columns: 1; }
-  /* Reset all card rotations on mobile 鈥?too cramped */
+  /* Reset all card rotations on mobile —too cramped */
   .mission-card:nth-child(n) { transform: none; }
   .actions { flex-direction: column; }
   .action-btn { width: 100%; justify-content: center; }
@@ -1584,7 +1554,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
 }
 
 /* ============================================================
-   INSIGHTS 鈥?close history banner
+   INSIGHTS —close history banner
    ============================================================ */
 
 .insights-banner {
@@ -1829,7 +1799,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
 }
 
 /* ============================================================
-   ARCHIVE 鈥?toolbar (header stats + select/export/clear) + bulk toolbar
+   ARCHIVE —toolbar (header stats + select/export/clear) + bulk toolbar
    + group headers + select-mode checkboxes
    ============================================================ */
 
@@ -2008,7 +1978,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   content: '';
   flex: 1;
   height: 0;
-  /* no extra line 鈥?dashed border-top already provides it */
+  /* no extra line —dashed border-top already provides it */
 }
 
 /* ---- Item select mode ---- */
@@ -2111,7 +2081,7 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
 }
 
 /* ============================================================
-   UI OVERHAUL 鈥?author badge + 3-section stack + perf optimizations
+   UI OVERHAUL —author badge + 3-section stack + perf optimizations
    ============================================================ */
 
 /* ---- Author X badge (bottom-right, replaces footer attribution) ---- */
@@ -2226,7 +2196,7 @@ body {
 }
 
 /* Defer render of the .saved-section / .history-section's content
-   until they enter the viewport 鈥?for users with many entries
+   until they enter the viewport —for users with many entries
    this skips rendering off-screen list items */
 .saved-list-cvp,
 .history-section .history-list {
@@ -2496,7 +2466,7 @@ body {
   text-align: center;
 }
 
-/* Active state 鈥?obvious contrast: dark fill + light text */
+/* Active state —obvious contrast: dark fill + light text */
 .stash-cat-tab.active {
   background: var(--ink);
   color: var(--paper);
@@ -2716,7 +2686,7 @@ body {
   line-height: 16px;
 }
 
-/* History list 鈥?hidden by default, shown when .expanded */
+/* History list —hidden by default, shown when .expanded */
 .stash-chip-history {
   display: none;
   list-style: none;
@@ -2876,7 +2846,7 @@ body {
      standalone options page (no slide-in animation). */
 }
 
-/* Reduce the staggered fade-in delay chain 鈥?was 0.16s + 0.08s per
+/* Reduce the staggered fade-in delay chain —was 0.16s + 0.08s per
    .mission-card, now immediate to avoid long layout shifts */
 .active-section .missions .mission-card { animation-delay: 0s !important; }
 .deferred-item { animation-delay: 0s !important; }
@@ -2890,7 +2860,7 @@ body {
 footer { animation: none !important; }
 
 /* ============================================================
-   HEADER 鈥?greeting + quote + product vision layout
+   HEADER —greeting + quote + product vision layout
    ============================================================ */
 
 .header-left h1 {
@@ -2909,11 +2879,11 @@ footer { animation: none !important; }
 }
 
 .header-product {
-  /* legacy class 鈥?kept as a no-op in case older code references it */
+  /* legacy class —kept as a no-op in case older code references it */
 }
 
-/* Product vision / brand statement 鈥?small unobtrusive label on
-   the right of the header. No post-it, no big quote mark, no tilt 鈥?
+/* Product vision / brand statement —small unobtrusive label on
+   the right of the header. No post-it, no big quote mark, no tilt —
    it's a brand tagline, not a feature. */
 .product-vision {
   font-family: var(--font-body);
@@ -2931,7 +2901,7 @@ footer { animation: none !important; }
   max-width: 220px;
 }
 
-/* (Removed the ::after large closing quote in commit pending 鈥?
+/* (Removed the ::after large closing quote in commit pending —
    the post-it was too prominent. The product-vision is now a
    small dashed-bordered label.) */
 
@@ -2978,7 +2948,7 @@ footer { animation: none !important; }
   box-shadow: 2px 2px 0 0 var(--ink);
 }
 /* ===========================================================================
-   HERO 鈥?empty-state concept showcase
+   HERO —empty-state concept showcase
    Shown only when no open tabs / no stash / no history. Three slogans rotate.
    =========================================================================== */
 .hero-section {
