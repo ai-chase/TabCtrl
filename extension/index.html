@@ -239,7 +239,8 @@
 
 <!-- Personal config (gitignored) —defines LOCAL_LANDING_PAGE_PATTERNS etc. -->
 <!-- If the file doesn't exist, app.js falls back to an empty array (see LOCAL_LANDING_PAGE_PATTERNS fallback in app.js). -->
-<script src="config.local.js"></script>
+<!-- `onerror` is allowed on <script> tags (it's an HTML attribute, not an inline event handler), so it survives MV3 CSP. -->
+<script src="config.local.js" onerror="/* file is gitignored + optional — silent fallback is intentional */"></script>
 
 <!-- i18n (sync-loaded before app.js so t() is available everywhere) -->
 <script src="i18n.js"></script>
