@@ -9,7 +9,7 @@
  * Renders the settings form and handles all user interactions
  * (language, aggregation mode, custom rules add/remove/edit, sub-
  * grouping toggle, reset, history retention). Reads/writes via
- * window.settingsAPI; re-renders the dashboard via window.renderDashboard
+ * window.settingsAPI; re-renders the dashboard via window.renderHome
  * on every change so the new-tab page stays in sync.
  */
 
@@ -339,7 +339,7 @@
       settings.customRules.push({ pattern: '', groupKey: '', groupLabel: '' });
       await window.settingsAPI.saveSettings(settings);
       await render();
-      if (window.renderDashboard) await window.renderDashboard();
+      if (window.renderHome) await window.renderHome();
       return;
     }
     if (action === 'remove-rule') {
@@ -350,7 +350,7 @@
         settings.customRules.splice(idx, 1);
         await window.settingsAPI.saveSettings(settings);
         await render();
-        if (window.renderDashboard) await window.renderDashboard();
+        if (window.renderHome) await window.renderHome();
       }
       return;
     }
@@ -363,7 +363,7 @@
         window.i18n.clearPersistedLang();
       }
       await render();
-      if (window.renderDashboard) await window.renderDashboard();
+      if (window.renderHome) await window.renderHome();
       return;
     }
     if (action === 'toggle-builtin') {
@@ -393,7 +393,7 @@
       });
       await window.settingsAPI.saveSettings(settings);
       await render();
-      if (window.renderDashboard) await window.renderDashboard();
+      if (window.renderHome) await window.renderHome();
       return;
     }
     if (action === 'remove-subgroup-rule') {
@@ -409,7 +409,7 @@
         settings.subGroupingRules.splice(realIdx, 1);
         await window.settingsAPI.saveSettings(settings);
         await render();
-        if (window.renderDashboard) await window.renderDashboard();
+        if (window.renderHome) await window.renderHome();
       }
       return;
     }
@@ -434,7 +434,7 @@
       settings.aggregationMode = e.target.value;
       await window.settingsAPI.saveSettings(settings);
       await render();
-      if (window.renderDashboard) await window.renderDashboard();
+      if (window.renderHome) await window.renderHome();
       return;
     }
     // Checkbox: sub-grouping
@@ -442,7 +442,7 @@
       const settings = await window.settingsAPI.getSettings();
       settings.subGroupingEnabled = e.target.checked;
       await window.settingsAPI.saveSettings(settings);
-      if (window.renderDashboard) await window.renderDashboard();
+      if (window.renderHome) await window.renderHome();
       return;
     }
     // Number: history retention (1-30 days)
@@ -484,7 +484,7 @@
       if (settings.customRules[idx]) {
         settings.customRules[idx][field] = ruleEl.value;
         await window.settingsAPI.saveSettings(settings);
-        if (window.renderDashboard) await window.renderDashboard();
+        if (window.renderHome) await window.renderHome();
       }
       return;
     }
@@ -503,7 +503,7 @@
       if (realIdx != null && settings.subGroupingRules[realIdx]) {
         settings.subGroupingRules[realIdx][field] = sgRuleEl.value;
         await window.settingsAPI.saveSettings(settings);
-        if (window.renderDashboard) await window.renderDashboard();
+        if (window.renderHome) await window.renderHome();
       }
       return;
     }

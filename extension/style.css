@@ -99,7 +99,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 32px 32px 80px;    /* smaller top padding (header was removed) */
 }
 
-.container:has(.dashboard-stack) {
+.container:has(.home-stack) {
   max-width: 100%;
 }
 
@@ -2123,8 +2123,8 @@ footer              { animation: fadeUp 0.4s ease 0.4s both; }
   display: block;
 }
 
-/* ---- 3-section dashboard stack (replaces dashboard-columns 2-col) ---- */
-.dashboard-stack {
+/* ---- 3-section home stack (replaces dashboard-columns 2-col) ---- */
+.home-stack {
   display: flex;
   flex-direction: column;
   gap: 32px;

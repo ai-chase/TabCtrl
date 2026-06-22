@@ -3327,7 +3327,7 @@ document.addEventListener('click', (e) => {
   setHeroSlide(slide);
 });
 
-async function renderDashboard() {
+async function renderHome() {
   await renderStaticDashboard();
   // Apply translations to any [data-i18n*] attributes still in the DOM.
   // (Language switcher moved into settings panel — no UI toggle to update here.)
@@ -4207,7 +4207,7 @@ function scheduleRefresh(reason) {
       const sig = tabSetSignature(openTabs);
       if (sig !== _lastRefreshSig) {
         _lastRefreshSig = sig;
-        await renderDashboard();
+        await renderHome();
       }
     } catch (err) {
       console.warn('[TabCtrl] refresh failed (' + (reason || 'unknown') + '):', err && err.message);
@@ -4240,8 +4240,8 @@ setInterval(() => scheduleRefresh('poll'), 5000);
 // (settings.html / settings-page.js) can ask the new-tab dashboard
 // to re-render after the user changes settings. Mounted 2026-06-22
 // as part of the options_page refactor.
-window.renderDashboard = renderDashboard;
+window.renderHome = renderHome;
 window.renderDeferredColumn = renderDeferredColumn;
 window.updateHistoryClearOlderButton = updateHistoryClearOlderButton;
 
-renderDashboard();
+renderHome();
