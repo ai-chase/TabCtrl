@@ -4236,4 +4236,12 @@ chrome.tabs.onRemoved.addListener(() => scheduleRefresh('onRemoved'));
 // gets dropped).
 setInterval(() => scheduleRefresh('poll'), 5000);
 
+// Expose refresh hooks on window so the standalone settings page
+// (settings.html / settings-page.js) can ask the new-tab dashboard
+// to re-render after the user changes settings. Mounted 2026-06-22
+// as part of the options_page refactor.
+window.renderDashboard = renderDashboard;
+window.renderDeferredColumn = renderDeferredColumn;
+window.updateHistoryClearOlderButton = updateHistoryClearOlderButton;
+
 renderDashboard();

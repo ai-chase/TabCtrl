@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="settings.page_title">TabCtrl — Settings</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <header class="settings-page-header">
+    <div class="settings-page-title-row">
+      <h1 class="settings-page-title" data-i18n="settings.page_title">TabCtrl Settings</h1>
+      <a class="settings-page-back" href="chrome://newtab" data-i18n-title="settings.back_tooltip" title="Open new tab dashboard">← <span data-i18n="settings.back_link">Back to Dashboard</span></a>
+    </div>
+    <p class="settings-page-subtitle" data-i18n="settings.page_subtitle">Configure how your new tab dashboard behaves. All settings save instantly.</p>
+  </header>
+
+  <main class="settings-page-body">
+    <div id="settingsBody">
+      <!-- Rendered by settings-page.js -->
+    </div>
+  </main>
+
+  <footer class="settings-page-footer">
+    <span data-i18n="settings.footer_storage">Settings are stored locally in your browser. Nothing is sent anywhere.</span>
+  </footer>
+
+  <!-- i18n (sync-loaded first) -->
+  <script src="i18n.js"></script>
+  <!-- settings storage + aggregation logic -->
+  <script src="settings.js"></script>
+  <!-- settings page UI (renders directly, no slide-in panel) -->
+  <script src="settings-page.js"></script>
+</body>
+</html>

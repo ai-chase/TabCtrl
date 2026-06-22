@@ -6,6 +6,10 @@
   "permissions": ["tabs", "activeTab", "storage", "sessions", "scripting", "bookmarks"],
   "host_permissions": ["<all_urls>"],
   "chrome_url_overrides": { "newtab": "index.html" },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
   "background": { "service_worker": "background.js" },
   "action": {
     "default_title": "TabCtrl",

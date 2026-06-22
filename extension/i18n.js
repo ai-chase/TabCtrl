@@ -170,6 +170,11 @@
       'lang.zh':                   '中',
 
       'settings.title':                 'Settings',
+      'settings.page_title':            'TabCtrl Settings',
+      'settings.page_subtitle':         'Configure how your new tab dashboard behaves. All settings save instantly.',
+      'settings.back_link':             'Back to Dashboard',
+      'settings.back_tooltip':          'Open new tab dashboard',
+      'settings.footer_storage':        'Settings are stored locally in your browser. Nothing is sent anywhere.',
       'settings.aggregation':           'Aggregation',
       'settings.display':               'Display',
       'settings.mode_full_hostname':    'Full hostname',
@@ -393,6 +398,11 @@
       'lang.zh':                   '中',
 
       'settings.title':                 '设置',
+      'settings.page_title':            'TabCtrl 设置',
+      'settings.page_subtitle':         '配置你的新标签页仪表盘行为。所有设置即时保存。',
+      'settings.back_link':             '返回仪表盘',
+      'settings.back_tooltip':          '打开新标签页仪表盘',
+      'settings.footer_storage':        '设置仅存储在本地浏览器中，不会上传到任何地方。',
       'settings.aggregation':           '聚合',
       'settings.display':               '显示',
       'settings.mode_full_hostname':    '完整域名',
