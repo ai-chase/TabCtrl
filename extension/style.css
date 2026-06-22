@@ -442,6 +442,7 @@ header {
      Without this, the outer flex layout collapses the chip to its minimum
      content width (18px = favicon), squeezing chip-text and chip-actions out. */
   width: 100%;
+  min-width: 0;  /* override column-flex default min-content (was 18px = favicon) */
   box-sizing: border-box;
 }
 .page-chip:hover {
