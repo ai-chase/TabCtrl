@@ -470,15 +470,16 @@ header {
 /* Chip title: single line + ellipsis. Long titles (CJK etc.) truncate
    with "..." rather than wrapping to a 2nd line. */
 .chip-text {
-  flex: 1;
+  flex: 1 1 auto;          /* basis: auto so the text claims its content width
+                              before the siblings (badge + actions) take theirs */
   min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.4;
   font-size: 14px;
-  color: var(--ink);       /* explicit ink (no fade feel) —2026-06-22 */
-  font-weight: 500;        /* slight bump for clarity —2026-06-22 */
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .chip-dupe-badge {
