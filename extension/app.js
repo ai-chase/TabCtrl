@@ -1422,7 +1422,11 @@ function smartTitle(title, url) {
     }
   }
 
-  return title || url;
+  // Fallback: if we have no real title (undefined/empty) and the URL
+  // didn't match any smart pattern (e.g. github.com landing '/'), use
+  // the friendly domain as the chip label rather than dumping the raw URL.
+  if (!title) return friendlyDomain(hostname) || url;
+  return title;
 }
 
 

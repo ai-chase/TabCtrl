@@ -372,7 +372,7 @@ header {
 .mission-card.collapsed { display: none !important; }
 
 .status-bar { display: none; }
-.mission-content { min-width: 0; }
+.mission-content { min-width: 0; flex: 1 1 auto; }  /* grab row width so page-chip text gets room — 2026-06-22 */
 .mission-meta { display: none; }
 
 .mission-top {
