@@ -16,7 +16,8 @@ grouped by domain, with one-click stash, close history, and undo.
 
 <br>
 
-<!-- BADGES — replace Chrome Web Store badge once published -->
+<!-- SSOT: Chinese is the source of truth. The English section below is reverse-synced from it.
+     If you edit EN, please also update ZH, or vice versa. Last sync: 2026-06-22. -->
 [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](#tech-stack)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](#)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -128,27 +129,22 @@ Open ⚙️ in the top-right corner.
 
 </div>
 
-> 📸 Drop your screenshots into [`docs/screenshots/`](docs/screenshots/)
-> and they'll be picked up by the README above.
-
 ### Installation
 
-#### From source (current method)
+TabCtrl isn't on the Chrome Web Store yet. To install it:
 
-1. Open Chrome and visit `chrome://extensions`
-2. Enable **Developer mode** (top-right toggle)
-3. Click **Load unpacked**
-4. Select the `extension/` folder in this repository
+1. Go to the [TabCtrl GitHub page](https://github.com/ai-chase/TabCtrl) and click **Code → Download ZIP**
+2. Unzip the downloaded file to a location you'll remember (e.g. your Documents folder)
+3. Open Chrome and visit `chrome://extensions`
+4. Turn on **Developer mode** (top-right toggle)
+5. Click **Load unpacked** and select the `extension/` folder from inside the unzipped directory
 
-That's it. New tabs now open TabCtrl.
-
-#### From Chrome Web Store
-
-*Coming soon — not yet published.*
+That's it — new tabs will now open TabCtrl.
 
 #### Update
 
-Visit `chrome://extensions`, find the TabCtrl card, click **Reload**.
+To get the latest version, download a fresh ZIP (or `git pull` if you cloned the repo),
+then revisit `chrome://extensions` and click **Reload** on the TabCtrl card.
 
 ### Usage
 
@@ -317,27 +313,21 @@ Follow along on the journey from solo side project to a small product.
 
 </div>
 
-> 📸 把截图丢进 [`docs/screenshots/`](docs/screenshots/) 目录，
-> README 就会自动引用。
-
 ### 安装
 
-#### 从源码安装（当前方式）
+TabCtrl 目前还没有上架到 Chrome 应用商店。安装方式：
 
-1. 打开 Chrome，访问 `chrome://extensions`
-2. 右上角开启「**开发者模式**」
-3. 点击「**加载已解压的扩展程序**」
-4. 选择本项目中的 `extension/` 文件夹
+1. 打开 [TabCtrl 的 GitHub 页面](https://github.com/ai-chase/TabCtrl)，点击 **Code → Download ZIP** 下载压缩包
+2. 把压缩包解压到一个你记得住的位置（例如「文档」文件夹）
+3. 打开 Chrome，访问 `chrome://extensions`
+4. 打开右上角的「**开发者模式**」
+5. 点击「**加载已解压的扩展程序**」，选择解压目录里的 `extension/` 文件夹
 
-安装完成后，新建标签页就会自动打开 TabCtrl。
-
-#### 从 Chrome 应用商店安装
-
-*即将上架 — 暂未发布。*
+完成后，新建标签页就会自动打开 TabCtrl。
 
 #### 更新
 
-打开 `chrome://extensions`，点击 TabCtrl 卡片底部的「**重新加载**」即可。
+下载最新的 ZIP（或 `git pull` 拉取最新代码），再到 `chrome://extensions` 页面点击 TabCtrl 卡片上的「**重新加载**」即可。
 
 ### 使用
 
