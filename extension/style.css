@@ -430,7 +430,6 @@ header {
   background: transparent;
   padding: 8px 6px;
   border: none;
-  border-bottom: 1px solid var(--muted);
   position: relative;
   display: flex;
   align-items: center;
@@ -446,8 +445,6 @@ header {
 .page-chip:hover {
   background: rgba(5, 150, 105, 0.06);   /* subtle sage highlight on row hover —2026-06-22 */
 }
-
-.page-chip:last-child { border-bottom: none; }
 
 .chip-favicon {
   width: 18px;
