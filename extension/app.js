@@ -510,27 +510,31 @@ async function closeSingleTabAndTrack(tabId) {
 /**
  * undoClose()
  *
- * Restores the most recently closed tab(s) by re-creating them via
- * chrome.tabs.create(). Returns the number of tabs restored.
+ * Restores the MOST RECENTLY closed tab by re-creating it via
+ * chrome.tabs.create(). Pops one entry off the LIFO stack so the
+ * user can undo repeatedly to peel back multiple closes. Returns
+ * the number of tabs restored (0 if the stack was empty).
  */
 async function undoClose() {
-  const tabsToRestore = _closedTabStack.splice(0); // pop all
-  for (const entry of tabsToRestore.reverse()) { // restore in original order
-    try {
-      const newTab = await chrome.tabs.create({
-        url:     entry.url,
-        windowId: entry.windowId,
-        active:  entry.active,
-      });
-      // If it was the active tab, focus the window
-      if (entry.active && entry.windowId) {
-        try { await chrome.windows.update(entry.windowId, { focused: true }); } catch {}
-      }
-    } catch (err) {
-      console.warn('[TabCtrl] undoClose failed for', entry.url, err);
+  const entry = _closedTabStack.pop(); // LIFO: undo one step at a time
+  if (!entry) return 0;
+  try {
+    await chrome.tabs.create({
+      url:      entry.url,
+      windowId: entry.windowId,
+      active:   entry.active,
+    });
+    // If it was the active tab, focus the window
+    if (entry.active && entry.windowId) {
+      try { await chrome.windows.update(entry.windowId, { focused: true }); } catch {}
     }
+    return 1;
+  } catch (err) {
+    // Push it back so the user can retry instead of losing the entry
+    _closedTabStack.push(entry);
+    console.warn('[TabCtrl] undoClose failed for', entry.url, err);
+    return 0;
   }
-  return tabsToRestore.length;
 }
 
 /**
