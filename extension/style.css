@@ -64,6 +64,7 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  isolation: isolate;
 
   /* Paper grain —notebook dot pattern */
   background-image: radial-gradient(var(--muted) 1px, transparent 1px);
@@ -74,7 +75,7 @@ body {
 /* Subtle vintage noise overlay */
 body::before {
   content: '';
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
@@ -1510,7 +1511,8 @@ body {
 .container {
   /* Will-change: transform forces a GPU layer for the content, so
      repaints inside don't reflow the body background */
-  will-change: contents;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Mission cards: avoid layout thrashing on hover.
