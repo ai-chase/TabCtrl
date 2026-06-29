@@ -49,8 +49,8 @@
   --r-md:  10px;
 
   /* === Typography === */
-  --font-heading: 'Kalam', 'Comic Sans MS', cursive;
-  --font-body:    'Patrick Hand', 'Comic Sans MS', cursive;
+  --font-heading: 'Kalam', 'Comic Sans MS', 'Microsoft YaHei', cursive;
+  --font-body:    'Patrick Hand', 'Comic Sans MS', 'Microsoft YaHei', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,6 +65,7 @@ body {
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: auto;
   isolation: isolate;
+  text-rendering: optimizeLegibility;
 
   /* Paper grain —notebook dot pattern */
   background-image: radial-gradient(var(--muted) 1px, transparent 1px);
